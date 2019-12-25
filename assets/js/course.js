@@ -1,3 +1,6 @@
+/*
+this js is used to get course's all information by the course_id and grade(gived by the front page)and put data in web
+*/
 var course_id = "123546";
 var grade = "3A";
 var course_infos; // store courses information we get from DB
@@ -9,7 +12,6 @@ $(document).ready(function(){
     $.ajax({
         url: "/api/courses?course_id=" + course_id + "&grade=" + grade,
         type: "GET",
-        cache: false,
         async: false,
         success: function(response){
             course_infos = response;
@@ -41,13 +43,18 @@ $(document).ready(function(){
     // schedule and classroom
     var schedule_content = "";
     var classroom_content = "";
-    for (let i = 0; i < course_info.course_schedule_classroom.length; i++) {
-        schedule_content += course_info.course_schedule_classroom[i].schedule;
-        classroom_content += course_info.course_schedule_classroom[i].classroom;
-        if(i != course_info.course_schedule_classroom.length - 1) {
-            schedule_content += ",";
-            classroom_content += ",";
-        }
+    if (course_info.schedule.length == course_info.classroom) { // check classroom equal to schedule
+        for (let i = 0; i < course_info.schedule.length; i++) {
+            schedule_content += course_info.schedule[i];
+            classroom_content += course_info.classroom[i];
+            if(i != course_info.course_schedule_classroom.length - 1) {
+                schedule_content += ",";
+                classroom_content += ",";
+            }
+        } 
+    }
+    else {
+        schedule_content = "上課時間與地點數量不符";
     }
     $("class_schedule").text(schedule_content);
     $("classroom").text(classroom_content);
@@ -57,9 +64,9 @@ $(document).ready(function(){
     $("description").text(course_info.description);
     // co_professors
     var co_professors_content = "";
-    for (let i = 0; i < course_info.course_co_professors.length; i++) {
-        co_professors_content += course_info.course_co_professors[i].professor;
-        if (i != course_info.course_co_professors.length - 1) {
+    for (let i = 0; i < course_info.co_professors.length; i++) {
+        co_professors_content += course_info.co_professors[i];
+        if (i != course_info.co_professors.length - 1) {
             co_professors_content += ",";
         }
     }
