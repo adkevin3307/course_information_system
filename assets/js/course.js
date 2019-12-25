@@ -1,8 +1,8 @@
 /*
 this js is used to get course's all information by the course_id and grade(gived by the front page)and put data in web
 */
-var course_id = "123546";
-var grade = "3A";
+var course_id = "B57040UF";
+var grade = "4A";
 var course_infos; // store courses information we get from DB
 var messages;
 
@@ -10,8 +10,8 @@ var messages;
 $(document).ready(function(){
     // get course all information by primary key(course_id, grade) and put in course_info
     $.ajax({
-        url: "/api/courses?course_id=" + course_id + "&grade=" + grade,
-        type: "GET",
+        url: "https://cis.ntouo.tw/api/courses?course_id=" + course_id + "&grade=" + grade,
+        type: "get",
         async: false,
         success: function(response){
             course_infos = response;
