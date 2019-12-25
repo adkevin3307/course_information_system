@@ -93,7 +93,6 @@ $(document).ready(function(){
         url: "/api/messages/" + course_id,
         type: "GET",
         cache: false,
-        async: false,
         success: function(response){
             messages = response;
         }
