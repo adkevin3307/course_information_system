@@ -38,30 +38,25 @@ $(document).ready(function(){
     else {
         $("#internship").text("否");
     }
-    $("category").text(course_info.category);
-    $("duration").text(course_info.duration);
+    $("#category").text(course_info.category);
+    $("#duration").text(course_info.duration);
     // schedule and classroom
     var schedule_content = "";
     var classroom_content = "";
-    if (course_info.schedule.length == course_info.classroom) { // check classroom equal to schedule
-        for (let i = 0; i < course_info.schedule.length; i++) {
-            schedule_content += course_info.schedule[i];
-            classroom_content += course_info.classroom[i];
-            if(i != course_info.course_schedule_classroom.length - 1) {
-                schedule_content += ",";
-                classroom_content += ",";
-            }
-        } 
+    for (let i = 0; i < course_info.schedule.length; i++) {
+        schedule_content += course_info.schedule[i];
+        classroom_content += course_info.classroom[i];
+        if(i != course_info.schedule.length - 1) {
+            schedule_content += ",";
+            classroom_content += ",";
+        }
     }
-    else {
-        schedule_content = "上課時間與地點數量不符";
-    }
-    $("class_schedule").text(schedule_content);
-    $("classroom").text(classroom_content);
+    $("#class_schedule").text(schedule_content);
+    $("#classroom").text(classroom_content);
 
-    $("main_field").text(course_info.main_field);
-    $("sub_field").text(course_info.sub_field);
-    $("description").text(course_info.description);
+    $("#main_field").text(course_info.main_field);
+    $("#sub_field").text(course_info.sub_field);
+    $("#description").text(course_info.description);
     // co_professors
     var co_professors_content = "";
     for (let i = 0; i < course_info.co_professors.length; i++) {
@@ -70,26 +65,26 @@ $(document).ready(function(){
             co_professors_content += ",";
         }
     }
-    $("co_professors").text(co_professors_content);
+    $("#co_professors").text(co_professors_content);
 
     // syllabus
-    $("chi_objective").text(course_info.chi_objective);
-    $("eng_objective").text(course_info.eng_objective);
-    $("chi_pre_course").text(course_info.chi_pre_course);
-    $("eng_pre_course").text(course_info.eng_pre_course);
-    $("chi_outline").text(course_info.chi_outline);
-    $("eng_outline").text(course_info.eng_outline);
-    $("chi_teaching_method").text(course_info.chi_teaching_method);
-    $("eng_teaching_method").text(course_info.eng_teaching_method);
-    $("chi_reference").text(course_info.chi_reference);
-    $("eng_reference").text(course_info.eng_reference);
-    $("chi_syllabus").text(course_info.chi_syllabus);
-    $("eng_syllabus").text(course_info.eng_syllabus);
-    $("chi_evaluation").text(course_info.chi_evaluation);
-    $("eng_evaluation").text(course_info.eng_evaluation);
+    $("#chi_objective").text(course_info.chi_objective);
+    $("#eng_objective").text(course_info.eng_objective);
+    $("#chi_pre_course").text(course_info.chi_pre_course);
+    $("#eng_pre_course").text(course_info.eng_pre_course);
+    $("#chi_outline").text(course_info.chi_outline);
+    $("#eng_outline").text(course_info.eng_outline);
+    $("#chi_teaching_method").text(course_info.chi_teaching_method);
+    $("#eng_teaching_method").text(course_info.eng_teaching_method);
+    $("#chi_reference").text(course_info.chi_reference);
+    $("#eng_reference").text(course_info.eng_reference);
+    $("#chi_syllabus").text(course_info.chi_syllabus);
+    $("#eng_syllabus").text(course_info.eng_syllabus);
+    $("#chi_evaluation").text(course_info.chi_evaluation);
+    $("#eng_evaluation").text(course_info.eng_evaluation);
 
     // get message and put in messages
-    $.ajax({
+    /*$.ajax({
         url: "/api/messages/" + course_id,
         type: "GET",
         cache: false,
@@ -104,5 +99,5 @@ $(document).ready(function(){
         content += "<tr><td>";
         content += messages[i];
         content += "</td></tr>";
-    }
+    }*/
 });
