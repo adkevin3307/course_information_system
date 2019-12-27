@@ -1655,11 +1655,14 @@
 	em, i {
 		font-style: italic;
 	}
-
+	
 	p {
-		margin: 0 0 2rem 0;
+		margin: 0rem 0 2rem 0;
 	}
 
+		p.word{
+			margin: 1rem 0 0rem 0;
+		}
 		p.special {
 			text-transform: uppercase;
 			font-size: .75rem;
@@ -3527,7 +3530,7 @@
 
 	.gallery {
 		width: 100%;
-		margin: 2.5rem 0 2.5rem 0;
+		margin: 0rem 0 0rem 0;
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -3540,6 +3543,7 @@
 		-webkit-align-items: stretch;
 		-ms-align-items: stretch;
 		align-items: stretch;
+		text-align: center;
 	}
 
 		.gallery > * {
@@ -3550,6 +3554,7 @@
 			-moz-flex-grow: 0;
 			-webkit-flex-grow: 0;
 			-ms-flex-grow: 0;
+			align-items: center;
 			flex-grow: 0;
 		}
 
