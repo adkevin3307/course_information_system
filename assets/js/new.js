@@ -7,6 +7,25 @@ FUNCTION:
 
 // Judge if new.html is used for new course or modify
 $(document).ready(function() {
-    var string = $("#test").value;
-    console.log(string);
-})
+    if(location.search == "") { // new a course
+
+    }
+    else { // change a course
+
+    }
+});
+
+$("#send").click(function(){
+    // check all input
+
+    // send data
+    $.ajax({
+        url: "/api/course",
+        type: "POST",
+        success: function(){
+            // prompt is success
+            // return to home page
+            $(location).attr('href', 'index.html');
+        }
+    });
+});
