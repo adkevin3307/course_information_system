@@ -35,6 +35,7 @@ $(document).ready(function(){
         }
     });
     var course_info = course_infos[0]; // turn array of course into a course
+    console.log(typeof course_info);
 
     // set course data into web page
     setData("#course_name_en", course_info.eng_course_name);

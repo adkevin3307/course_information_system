@@ -5,6 +5,46 @@ FUNCTION:
 2. Collect user input and send to database
 */
 
+var data = {
+    course_id: "",
+    grade: "",
+    professor: "",
+    year_semester: "",
+    faculty_name: "",
+    chi_course_name: "",
+    eng_course_name: "",
+    credit: "",
+    hour: "",
+    max_students: "",
+    min_students: "",
+    category: "",
+    duration: "",
+    internship: "",
+    main_field: "",
+    sub_field: "",
+    students: "",
+    description: "",
+    core_ability: "",
+    chi_objective: "",
+    eng_objective: "",
+    chi_pre_course: "",
+    eng_pre_course: "",
+    chi_outline: "",
+    eng_outline: "",
+    chi_teaching_method: "",
+    eng_teaching_method: "" ,
+    chi_reference: "",
+    eng_reference: "",
+    chi_syllabus: "",
+    eng_syllabus: "",
+    chi_evaluation: "",
+    eng_evaluation: "",
+    reference_link:　"",
+    schedule: [],
+    classroom: [],
+    co_professors: []
+}
+
 // check if there is data and set data in web
 function setData(id, value) {
     if(value == null) {
@@ -63,6 +103,7 @@ $(document).ready(function() {
         
         $("#category").val(course_info.category);
         $("#duration").val(course_info.duration);
+        $("#schedule").val(course_info.schedule);
         $("#main_field").val(course_info.main_field);
         $("#sub_field").val(course_info.sub_field);
         $("#description").val(course_info.description);
@@ -93,15 +134,55 @@ $(document).ready(function() {
     }
 });
 
-$("#send").click(function(){
-    // check all input
+// get user input -> check -> show
+$("#getData").click(function() {
+    // get input and put int var data
+    data.year_semester = $("#year_semester").val();
+    data.course_id = $("#course_id").val();
+    data.chi_course_name = $("#chi_course_name").val();
+    data.eng_course_name = $("#eng_course_name").val();
+    data.professor = $("#professor").val();
+    data.grade = $("#grade").val();
+    data.credit = $("#credit").val();
+    data.hour = $("#hour").val();
+    data.max_students = $("#max_students").val();
+    data.min_students = $("#min_students").val();
+    data.faculty_name = $("#faculty_name").val();
+    data.internship = $("#internship").val();
+    data.category = $("#category").val();
+    data.duration = $("#duration").val();
+    data.schedule = $("#schedule").val();
+    data.classroom = $("#classroom").val();
+    data.main_field = $("#main_field").val();
+    data.sub_field = $("#sub_field").val();
+    data.description = $("#description").val();
+    data.co_professors = $("#co_professors").val();
+    data.chi_objective = $("#chi_objective").val();
+    data.eng_objective = $("#eng_objective").val();
+    data.chi_pre_course = $("#chi_pre_course").val();
+    data.eng_pre_course = $("#eng_pre_course").val();
+    data.chi_outline = $("#chi_outline").val();
+    data.eng_outline = $("#eng_outline").val();
+    data.chi_teaching_method = $("#chi_teaching_method").val();
+    data.eng_teaching_method = $("#eng_teaching_method").val();
+    data.chi_reference = $("#chi_reference").val();
+    data.eng_reference = $("#eng_reference").val();
+    data.chi_syllabus = $("#chi_syllabus").val();
+    data.eng_syllabus = $("#eng_syllabus").val();
+    data.chi_evaluation = $("#chi_evaluation").val();
+    data.eng_evaluation = $("#eng_evaluation").val();
+    // check data
+    // output for user check
+})
 
+// send all data to DB
+$("#send").click(function(){
     // send data
     if(location.search == "") { // add a course
         $.ajax({
-            url: "/api/course",
+            url: "https://cis.ntouo.tw/api/course",
             type: "POST",
-            success: function(){
+            success: function() {
                 // prompt is success
                 // return to home page
                 $(location).attr('href', 'index.html');
@@ -109,7 +190,20 @@ $("#send").click(function(){
         });
     }
     else { // change a course
-        
+        var search_str = location.search.substr(1);
+        var search_array = search_str.split('&');
+        var search_array0 = search_array[0].split('=');
+        var search_array1 = search_array[1].split('=');
+        var course_id = search_array0[1];
+        var grade = search_array1[1];
+        $.ajax({
+            url: "https://cis.ntouo.tw/api/course/" + course_id + "&grade=" + grade,
+            type: "PUT",
+            success: function() {
+                // prompt is success
+                // return to home page
+                $(location).attr('href', 'index.html');
+            }
+        });
     }
-    
 });
