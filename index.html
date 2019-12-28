@@ -14,14 +14,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-	//$(function () {
-	//	$('#bu').click(function () {
-	//		$('html,body').animate({scrollTop: $('#One').offset().top}, 800);
-	//	});
-	//});
-
-	function search()
-	{
+	function search() {
+		var course_infos;
 		var course_id = $('#course_id').val();
 		var course_name = $('#course_name').val();
 		var faculty_name = $('#faculty_name').val();
@@ -36,43 +30,55 @@
 		
 		
 		$.ajax({
-        url: "https://cis.ntouo.tw/api/courses?course_id="+course_id+"&course_name="+course_name+"&faculty_name="+faculty_name+"&professor="+professor+"&schedule="+schedule+"&main_field="+main_field+"&sub_field="+sub_field+"&classroom="+classroom+"&grade="+grade+"&category="+category+"&description="+description+"",
-        type: "get",
-        async: false,
-        success: function(response){
-            course_infos = response;
-        }
-    });
-	
-	$('#search_results').append(
-		"<section id='one' class='wrapper style2'>"+
-				"<div class='inner'>"+
-					"<div id = 'outputclass' class='grid-style'>"+
-						
+			url: "https://cis.ntouo.tw/api/courses?course_id=" + course_id +
+				"&course_name=" + course_name +
+				"&faculty_name=" + faculty_name +
+				"&professor=" + professor +
+				"&schedule=" + schedule + 
+				"&main_field=" + main_field + 
+				"&sub_field=" + sub_field +
+				"&classroom=" + classroom +
+				"&grade=" + grade +
+				"&category=" + category + 
+				"&description=" + description,
+			type: "get",
+			async: false,
+			success: function(response) {
+				course_infos = response;
+				console.log(course_infos);
+			}
+    	});
+
+		$('#search_results').append(
+			"<section id='one' class='wrapper style2'>"+
+					"<div class='inner'>"+
+						"<div id = 'outputclass' class='grid-style'>"+
+							
+						"</div>"+
 					"</div>"+
-				"</div>"+
-		"</section>"
-	);
-	for(j = 0; j < course_infos.length; j++)
-	{
-		$('#outputclass').append(
-			"<div>"+
-				"<div class='box'>"+
-					"<div class='content'>"+
-						"<header class='align-center'>"+
-							"<p>"+course_infos[j].main_field+"</p>"+
-							"<h2>"+course_infos[j].course_name+"</h2>"+
-						"</header>"+
-						"<footer class='align-center'>"+
-							"<a href='#generic.html?course_id="+course_infos[j].course_id+"&grade="+course_infos[j].grade+"' class='button alt' id = 'accordionExample'>詳細資訊</a>"+
-						"</footer>"+
-					"</div>"+
-				"</div>"+
-			"</div>"
+			"</section>"
 		);
-	
+
+		console.log(course_infos);
+		
+		for(j = 0; j < course_infos.length; j++) {
+			$('#outputclass').append(
+				"<div>" +
+					"<div class='box'>" +
+						"<div class='content'>" +
+							"<header class='align-center'>" +
+								"<p>" + course_infos[j].main_field + "</p>" +
+								"<h2>" + course_infos[j].chi_course_name + "</h2>" +
+							"</header>" +
+							"<footer class='align-center'>" +
+								"<a href='#generic.html?course_id=" + course_infos[j].course_id + "&grade=" + course_infos[j].grade + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
+							"</footer>" +
+						"</div>" +
+					"</div>" +
+				"</div>"
+			);
+		}
 	}
-	
 
 	$(document).ready(function () {
 
@@ -190,15 +196,12 @@
 						$(targetId2).append("<br>" +
 								"餐廳名稱:" + restName + "<br >餐廳地址:" + restAddress + "<br >食物名稱:" + foodName + "<br >食物編號:" + foodID + "<br >食物單價:" + cost + "<br >食物個數:" + count + "<br >"
 						);
-
 					}
 
 					$(targetId2).append("" +
-							"</div>"
-							+
+							"</div>" +
 							"<div class = 'modal-footer' >" +
-							"<button type = 'button' class= 'btn btn-secondary' data-dismiss = 'modal' >Close</button>"
-							+
+							"<button type = 'button' class= 'btn btn-secondary' data-dismiss = 'modal' >Close</button>" +
 							"</div>" +
 							"</div>" +
 							"</div>" +
@@ -211,16 +214,12 @@
 					var buttonTarget = "#collapseButton" + i;
 					$(buttonTarget).click(function () {
 						var target = "#" + this.id.split('collapseButton')[1];
-						$(target).collapse('toggle')
+						$(target).collapse('toggle');
 					});
 				}
 			},
-			error: function () {
-
-			}
+			error: function () {}
 		});
-
-
 	});
 
 </script>
@@ -241,9 +240,8 @@
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li>
+					<li><a href="index.html">首頁</a></li>
+					<li><a href="new.html">新增課程</a></li>
 				</ul>
 			</nav>
 			
@@ -363,8 +361,7 @@
 						
 						<div>
 							<p class = "word">開課年級</p>
-							<select id='grade'>
-							</select>
+							<input type="text" id='grade'>
 						</div>
 					</div>
 					<div class=" gallery">	

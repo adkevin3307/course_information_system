@@ -18,9 +18,11 @@ function setData(id, value) {
 // Judge if new.html is used for new course or modify
 $(document).ready(function() {
     if(location.search != "") {  // change a course
-        // change title and document
+        // change title ,document and button
+        $("title").text("修改課程");
         $("#title").text("修改");
         $("#document").text("點擊欲修改的項目進行修改，不修改的項目請維持原樣。");
+        $("#send").text("修改");
         // set old data
         // process input from url
         var search_str = location.search.substr(1);
@@ -83,9 +85,11 @@ $(document).ready(function() {
         setData("#eng_evaluation", course_info.eng_evaluation);
     }
     else { // new a course
-        // change title and document
+        // change title ,document and button
+        $("title").text("新增課程");
         $("#title").text("新增");
         $("#document").text("將每個項目的資料填入，完成後點擊送出。");
+        $("#send").text("新增");
     }
 });
 
@@ -93,13 +97,19 @@ $("#send").click(function(){
     // check all input
 
     // send data
-    $.ajax({
-        url: "/api/course",
-        type: "POST",
-        success: function(){
-            // prompt is success
-            // return to home page
-            $(location).attr('href', 'index.html');
-        }
-    });
+    if(location.search == "") { // add a course
+        $.ajax({
+            url: "/api/course",
+            type: "POST",
+            success: function(){
+                // prompt is success
+                // return to home page
+                $(location).attr('href', 'index.html');
+            }
+        });
+    }
+    else { // change a course
+        
+    }
+    
 });
