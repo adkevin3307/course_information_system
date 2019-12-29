@@ -5,7 +5,7 @@ FUNCTION:
 2. Collect user input and send to database
 */
 
-var data = {
+var input = {
     course_id: "",
     grade: "",
     professor: "",
@@ -137,42 +137,104 @@ $(document).ready(function() {
 // get user input -> check -> show
 $("#getData").click(function() {
     // get input and put int var data
-    data.year_semester = $("#year_semester").val();
-    data.course_id = $("#course_id").val();
-    data.chi_course_name = $("#chi_course_name").val();
-    data.eng_course_name = $("#eng_course_name").val();
-    data.professor = $("#professor").val();
-    data.grade = $("#grade").val();
-    data.credit = $("#credit").val();
-    data.hour = $("#hour").val();
-    data.max_students = $("#max_students").val();
-    data.min_students = $("#min_students").val();
-    data.faculty_name = $("#faculty_name").val();
-    data.internship = $("#internship").val();
-    data.category = $("#category").val();
-    data.duration = $("#duration").val();
-    data.schedule = $("#schedule").val();
-    data.classroom = $("#classroom").val();
-    data.main_field = $("#main_field").val();
-    data.sub_field = $("#sub_field").val();
-    data.description = $("#description").val();
-    data.co_professors = $("#co_professors").val();
-    data.chi_objective = $("#chi_objective").val();
-    data.eng_objective = $("#eng_objective").val();
-    data.chi_pre_course = $("#chi_pre_course").val();
-    data.eng_pre_course = $("#eng_pre_course").val();
-    data.chi_outline = $("#chi_outline").val();
-    data.eng_outline = $("#eng_outline").val();
-    data.chi_teaching_method = $("#chi_teaching_method").val();
-    data.eng_teaching_method = $("#eng_teaching_method").val();
-    data.chi_reference = $("#chi_reference").val();
-    data.eng_reference = $("#eng_reference").val();
-    data.chi_syllabus = $("#chi_syllabus").val();
-    data.eng_syllabus = $("#eng_syllabus").val();
-    data.chi_evaluation = $("#chi_evaluation").val();
-    data.eng_evaluation = $("#eng_evaluation").val();
+    input.year_semester = $("#year_semester").val();
+    input.course_id = $("#course_id").val();
+    input.chi_course_name = $("#chi_course_name").val();
+    input.eng_course_name = $("#eng_course_name").val();
+    input.professor = $("#professor").val();
+    input.grade = $("#grade").val();
+    input.credit = $("#credit").val();
+    input.hour = $("#hour").val();
+    input.max_students = $("#max_students").val();
+    input.min_students = $("#min_students").val();
+    input.faculty_name = $("#faculty_name").val();
+    input.internship = $("#internship").val();
+    input.category = $("#category").val();
+    input.duration = $("#duration").val();
+    input.schedule = $("#schedule").val();
+    input.classroom = $("#classroom").val();
+    input.main_field = $("#main_field").val();
+    input.sub_field = $("#sub_field").val();
+    input.description = $("#description").val();
+    input.co_professors = $("#co_professors").val();
+    input.chi_objective = $("#chi_objective").val();
+    input.eng_objective = $("#eng_objective").val();
+    input.chi_pre_course = $("#chi_pre_course").val();
+    input.eng_pre_course = $("#eng_pre_course").val();
+    input.chi_outline = $("#chi_outline").val();
+    input.eng_outline = $("#eng_outline").val();
+    input.chi_teaching_method = $("#chi_teaching_method").val();
+    input.eng_teaching_method = $("#eng_teaching_method").val();
+    input.chi_reference = $("#chi_reference").val();
+    input.eng_reference = $("#eng_reference").val();
+    input.chi_syllabus = $("#chi_syllabus").val();
+    input.eng_syllabus = $("#eng_syllabus").val();
+    input.chi_evaluation = $("#chi_evaluation").val();
+    input.eng_evaluation = $("#eng_evaluation").val();
     // check data
     // output for user check
+    setData("#course_name_en", course_info.eng_course_name);
+    setData("#course_name_ch", course_info.chi_course_name);
+    // basic_info
+    setData("#course_id", course_info.course_id);
+    setData("#faculty_name", course_info.faculty_name);
+    setData("#professor", course_info.professor);
+    setData("#grade", course_info.grade);
+    setData("#credit", course_info.credit);
+    setData("#hour", course_info.hour);
+    setData("#max_students", course_info.max_students);
+    setData("#min_students", course_info.min_students);
+    setData("#students", course_info.students + "人 (此人數為最近一次查詢時人數)");
+    if(course_info.internship) {
+        $("#internship").text("是");
+    }
+    else {
+        $("#internship").text("否");
+    }
+    setData("#category", course_info.category);
+    setData("#duration", course_info.duration);
+    // schedule and classroom
+    var schedule_content = "";
+    var classroom_content = "";
+    for (let i = 0; i < course_info.schedule.length; i++) {
+        schedule_content += course_info.schedule[i];
+        classroom_content += course_info.classroom[i];
+        if(i != course_info.schedule.length - 1) {
+            schedule_content += ",";
+            classroom_content += ",";
+        }
+    }
+    setData("#class_schedule", schedule_content);
+    setData("#classroom", classroom_content);
+
+    setData("#main_field", course_info.main_field);
+    setData("#sub_field", course_info.sub_field);
+    setData("#description", course_info.description);
+    // co_professors
+    var co_professors_content = "";
+    for (let i = 0; i < course_info.co_professors.length; i++) {
+        co_professors_content += course_info.co_professors[i];
+        if (i != course_info.co_professors.length - 1) {
+            co_professors_content += ",";
+        }
+    }
+    setData("#co_professors", co_professors_content);
+
+    // syllabus
+    setData("#chi_objective", course_info.chi_objective);
+    setData("#eng_objective", course_info.eng_objective);
+    setData("#chi_pre_course", course_info.chi_pre_course);
+    setData("#eng_pre_course", course_info.eng_pre_course);
+    setData("#chi_outline", course_info.chi_outline);
+    setData("#eng_outline", course_info.eng_outline);
+    setData("#chi_teaching_method", course_info.chi_teaching_method);
+    setData("#eng_teaching_method", course_info.eng_teaching_method);
+    setData("#chi_reference", course_info.chi_reference);
+    setData("#eng_reference", course_info.eng_reference);
+    setData("#chi_syllabus", course_info.chi_syllabus);
+    setData("#eng_syllabus", course_info.eng_syllabus);
+    setData("#chi_evaluation", course_info.chi_evaluation);
+    setData("#eng_evaluation", course_info.eng_evaluation);
 })
 
 // send all data to DB
@@ -182,6 +244,7 @@ $("#send").click(function(){
         $.ajax({
             url: "https://cis.ntouo.tw/api/course",
             type: "POST",
+            data: input,
             success: function() {
                 // prompt is success
                 // return to home page
@@ -199,6 +262,7 @@ $("#send").click(function(){
         $.ajax({
             url: "https://cis.ntouo.tw/api/course/" + course_id + "&grade=" + grade,
             type: "PUT",
+            data: inpupt,
             success: function() {
                 // prompt is success
                 // return to home page
