@@ -173,33 +173,33 @@ $("#getData").click(function() {
     input.eng_evaluation = $("#eng_evaluation").val();
     // check data
     // output for user check
-    setData("#course_name_en", course_info.eng_course_name);
-    setData("#course_name_ch", course_info.chi_course_name);
+    setData("#course_name_en", input.eng_course_name);
+    setData("#course_name_ch", input.chi_course_name);
     // basic_info
-    setData("#course_id", course_info.course_id);
-    setData("#faculty_name", course_info.faculty_name);
-    setData("#professor", course_info.professor);
-    setData("#grade", course_info.grade);
-    setData("#credit", course_info.credit);
-    setData("#hour", course_info.hour);
-    setData("#max_students", course_info.max_students);
-    setData("#min_students", course_info.min_students);
-    setData("#students", course_info.students + "人 (此人數為最近一次查詢時人數)");
-    if(course_info.internship) {
+    setData("#course_id", input.course_id);
+    setData("#faculty_name", input.faculty_name);
+    setData("#professor", input.professor);
+    setData("#grade", input.grade);
+    setData("#credit", input.credit);
+    setData("#hour", input.hour);
+    setData("#max_students", input.max_students);
+    setData("#min_students", input.min_students);
+    setData("#students", input.students + "人 (此人數為最近一次查詢時人數)");
+    if(input.internship) {
         $("#internship").text("是");
     }
     else {
         $("#internship").text("否");
     }
-    setData("#category", course_info.category);
-    setData("#duration", course_info.duration);
+    setData("#category", input.category);
+    setData("#duration", input.duration);
     // schedule and classroom
     var schedule_content = "";
     var classroom_content = "";
-    for (let i = 0; i < course_info.schedule.length; i++) {
-        schedule_content += course_info.schedule[i];
-        classroom_content += course_info.classroom[i];
-        if(i != course_info.schedule.length - 1) {
+    for (let i = 0; i < input.schedule.length; i++) {
+        schedule_content += input.schedule[i];
+        classroom_content += input.classroom[i];
+        if(i != input.schedule.length - 1) {
             schedule_content += ",";
             classroom_content += ",";
         }
@@ -207,34 +207,34 @@ $("#getData").click(function() {
     setData("#class_schedule", schedule_content);
     setData("#classroom", classroom_content);
 
-    setData("#main_field", course_info.main_field);
-    setData("#sub_field", course_info.sub_field);
-    setData("#description", course_info.description);
+    setData("#main_field", input.main_field);
+    setData("#sub_field", input.sub_field);
+    setData("#description", input.description);
     // co_professors
     var co_professors_content = "";
-    for (let i = 0; i < course_info.co_professors.length; i++) {
-        co_professors_content += course_info.co_professors[i];
-        if (i != course_info.co_professors.length - 1) {
+    for (let i = 0; i < input.co_professors.length; i++) {
+        co_professors_content += input.co_professors[i];
+        if (i != input.co_professors.length - 1) {
             co_professors_content += ",";
         }
     }
     setData("#co_professors", co_professors_content);
 
     // syllabus
-    setData("#chi_objective", course_info.chi_objective);
-    setData("#eng_objective", course_info.eng_objective);
-    setData("#chi_pre_course", course_info.chi_pre_course);
-    setData("#eng_pre_course", course_info.eng_pre_course);
-    setData("#chi_outline", course_info.chi_outline);
-    setData("#eng_outline", course_info.eng_outline);
-    setData("#chi_teaching_method", course_info.chi_teaching_method);
-    setData("#eng_teaching_method", course_info.eng_teaching_method);
-    setData("#chi_reference", course_info.chi_reference);
-    setData("#eng_reference", course_info.eng_reference);
-    setData("#chi_syllabus", course_info.chi_syllabus);
-    setData("#eng_syllabus", course_info.eng_syllabus);
-    setData("#chi_evaluation", course_info.chi_evaluation);
-    setData("#eng_evaluation", course_info.eng_evaluation);
+    setData("#chi_objective", input.chi_objective);
+    setData("#eng_objective", input.eng_objective);
+    setData("#chi_pre_course", input.chi_pre_course);
+    setData("#eng_pre_course", input.eng_pre_course);
+    setData("#chi_outline", input.chi_outline);
+    setData("#eng_outline", input.eng_outline);
+    setData("#chi_teaching_method", input.chi_teaching_method);
+    setData("#eng_teaching_method", input.eng_teaching_method);
+    setData("#chi_reference", input.chi_reference);
+    setData("#eng_reference", input.eng_reference);
+    setData("#chi_syllabus", input.chi_syllabus);
+    setData("#eng_syllabus", input.eng_syllabus);
+    setData("#chi_evaluation", input.chi_evaluation);
+    setData("#eng_evaluation", input.eng_evaluation);
 })
 
 // send all data to DB
