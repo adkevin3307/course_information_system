@@ -16,31 +16,31 @@
 <script>
 	function search() {
 		var course_infos;
-		var course_id = $('#course_id').val();
-		var course_name = $('#course_name').val();
-		var faculty_name = $('#faculty_name').val();
-		var professor = $('#professor').val();
-		var schedule = $('#schedule').val();
-		var main_field = $('#main_field').val();
-		var sub_field = $('#sub_field').val();
-		var classroom = $('#classroom').val();
-		var grade = $('#grade').val();
-		var category = $('#category').val();
-		var description = $('#description').val();
-		
-		
+		var course_id = ($('#course_id').val() == null) ? "" : $("#course_id").val() ;
+		var course_name = ($('#course_name').val() == null) ? "" : $("#course_name").val();
+		var faculty_name = ($('#faculty_name').val() == null) ? "" : $("#faculty_name").val();
+		var professor = ($('#professor').val() == null) ? "" : $("#professor").val();
+		var schedule = ($('#schedule').val() == null) ? "" : $("#schedule").val();
+		var main_field = ($('#main_field').val() == null) ? "" : $("#main_field").val();
+		var sub_field = ($('#sub_field').val() == null) ? "" : $("#sub_field").val();
+		var classroom = ($('#classroom').val() == null) ? "" : $("#classroom").val();
+		var grade = ($('#grade').val() == null) ? "" : $("#grade").val();
+		var category = ($('#category').val() == null) ? "" : $("#category");
+		var description = ($('#description').val() == null) ? "" : $("#description").val();
+		var url_str = "https://cis.ntouo.tw/api/courses?course_id=" + course_id +
+			"&course_name=" + course_name +
+			"&faculty_name=" + faculty_name +
+			"&professor=" + professor +
+			"&schedule=" + schedule + 
+			"&main_field=" + main_field +
+			"&sub_field=" + sub_field +
+			"&classroom=" + classroom +
+			"&grade=" + grade +
+			"&category=" + category + 
+			"&description=" + description;
+
 		$.ajax({
-			url: "https://cis.ntouo.tw/api/courses?course_id=" + course_id +
-				"&course_name=" + course_name +
-				"&faculty_name=" + faculty_name +
-				"&professor=" + professor +
-				"&schedule=" + schedule + 
-				"&main_field=" + main_field + 
-				"&sub_field=" + sub_field +
-				"&classroom=" + classroom +
-				"&grade=" + grade +
-				"&category=" + category + 
-				"&description=" + description,
+			url: url_str,
 			type: "get",
 			async: false,
 			success: function(response) {
@@ -58,8 +58,6 @@
 					"</div>"+
 			"</section>"
 		);
-
-		console.log(course_infos);
 		
 		for(j = 0; j < course_infos.length; j++) {
 			$('#outputclass').append(
@@ -71,7 +69,7 @@
 								"<h2>" + course_infos[j].chi_course_name + "</h2>" +
 							"</header>" +
 							"<footer class='align-center'>" +
-								"<a href='#generic.html?course_id=" + course_infos[j].course_id + "&grade=" + course_infos[j].grade + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
+								"<a href='generic.html?course_id=" + course_infos[j].course_id + "&grade=" + course_infos[j].grade + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
 							"</footer>" +
 						"</div>" +
 					"</div>" +
@@ -79,149 +77,6 @@
 			);
 		}
 	}
-
-	$(document).ready(function () {
-
-		var url = "/ShowHistoryOrderServlet"; // test url
-		$.ajax({
-			url: url,
-			type: "GET",
-			async: true,
-			dataType: "json",
-			contentType: 'application/json; charset=UTF-8',
-			success: function (data) {
-			    console.log(data);
-				var data_length = data.length;           //現在有多少訂單
-				for (var i = 0; i < data_length; i++) {
-					var customer = data[i].Customer;
-					var customerID = customer.User_Id;
-					var customerName = customer.User_Name;
-					var customerAccount = customer.Account;
-					var customerAddress = customer.Address;
-					var customerOther = customer.Other;
-					var customerPhoneNumber = customer.Phone_Number;
-
-					$('#accordionExample').append(
-							"<div class = 'card' >" +
-							"<div class = 'card-header' id = 'headingOne' >" +
-							"<h2 class = 'mb-0' >" +
-							"<button id='collapseButton" + i + "' class = 'btn btn-link' type = 'button' data-toggle = 'collapse' data-target = '#"
-							+ i + "' aria-expanded = 'true' aria-controls = '" + i
-							+ "' >訂單編號:" + orderID + "&emsp;&emsp;食客帳號:" + customerAccount + "&emsp;&emsp;外送員帳號:" + deliverAccount + "</button>" +
-							"</h2>" +
-							"</div>" +
-							"<div id = '" + i
-							+ "' class = 'collapse' aria-labelledby = 'headingOne' data-parent = '#accordionExample'>"
-							+     //第一個ID
-							"<div class = 'card-body' >" +
-							"<button type = 'button' class = 'btn btn-primary' data-toggle = 'modal' data-target = '#customer" + i + "'> 食客資訊 </button> "
-							+
-							"<div class = 'modal fade' id = 'customer" + i + "' tabindex = '-1' role = 'dialog' aria-labelledby = 'exampleModalCenterTitle' aria-hidden = 'true'>"
-							+
-							"<div class= 'modal-dialog modal-dialog-centered' role = 'document' >" +
-							"<div class= 'modal-content' >" +
-							"<div class = 'modal-header' >" +
-							"<h5 class = 'modal-title' id = 'exampleModalCenterTitle' > 食客資訊 </h5>" +
-							"<button type = 'button' class= 'close' data-dismiss = 'modal' aria-label = 'Close' >" +
-							"<span aria-hidden = 'true' >&times;</span>" +
-							"</button>" +
-							"</div>" +
-							"<div class = 'modal-body' style = 'text-align:left;'>食客ID:" + customerID + "<br >食客名字:" + customerName + "<br >食客帳號:" + customerAccount + "<br >食客地址:" + customerAddress + "<br >食客備註:" + customerOther + "<br >食客電話:" + customerPhoneNumber + "</div>"
-							+
-							"<div class= 'modal-footer' >" +
-							"<button type = 'button' class= 'btn btn-secondary' data-dismiss = 'modal' >Close</button>"
-							+
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"<button type = 'button' class= 'btn btn-primary' data-toggle = 'modal' data-target = '#deliver" + i + "' > 外送員資訊 </button> "
-							+
-							"<div class= 'modal fade' id = 'deliver" + i + "' tabindex = '-1' role = 'dialog' aria-labelledby = 'exampleModalCenterTitle' aria-hidden = 'true' >"
-							+
-							"<div class= 'modal-dialog modal-dialog-centered' role = 'document' >" +
-							"<div class= 'modal-content' >" +
-							"<div class= 'modal-header' >" +
-							"<h5 class= 'modal-title' id = 'exampleModalCenterTitle' >外送員資訊</h5>" +
-							"<button type = 'button' class= 'close' data-dismiss = 'modal' aria-label = 'Close' >" +
-							"<span aria-hidden = 'true'>&times;</span>" +
-							"</button>" +
-							"</div>" +
-							"<div class = 'modal-body' style = 'text-align:left;'>外送員ID:" + deliverID + "<br>外送員名字:" + deliverName + "<br >外送員帳號:" + deliverAccount + "<br >外送員電話:" + deliverPhoneNumber + "<br ></div>" +
-							"<div class= 'modal-footer' >" +
-							"<button type = 'button' class='btn btn-secondary' data-dismiss ='modal' >Close</button>"
-							+
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"<button type = 'button' class= 'btn btn-primary' data-toggle = 'modal' data-target = '#order" + i + "' > 訂單資訊 </button>"
-							+
-							"<div class= 'modal fade' id = 'order" + i + "' tabindex = '-1' role = 'dialog' aria-labelledby = 'exampleModalCenterTitle' aria-hidden = 'true' >"
-							+
-							"<div class= 'modal-dialog modal-dialog-centered' role = 'document' >" +
-							"<div class= 'modal-content' >" +
-							"<div class= 'modal-header' >" +
-							"<h5 class= 'modal-title' id = 'exampleModalCenterTitle' >訂單資訊</h5>" +
-							"<button type = 'button' class= 'close' data-dismiss = 'modal' aria-label = 'Close' >" +
-							"<span aria-hidden = 'true' >&times;</span>" +
-							"</button>" +
-							"</div>" +
-							"<div id = '"+id2+"' class= 'modal-body' style = 'text-align:left;'>訂單總價:" + total + "<br >訂單種類:" + typeCount + "<br>" + "訂單起始時間:"+startTime+"<br >訂單狀態:"+orderStatus+"<br >訂單權重:"+castingPrio+"<br>"
-					);
-
-
-					// const buttonCustomer = "#customer"+i;
-					// $(buttonCustomer).click(function () {
-					//
-					// }
-					// const buttonDeliver = "#deliver"+i;
-					// $(buttonDeliver).click(function () {
-					//
-					// }
-					// const buttonOrder = "#order"+i;
-					// $(buttonOrder).click(function () {
-					//
-					// }
-
-                    var targetId2 = "#"+id2;
-					var meal = order.Meals;
-					for (var j = 0; j < meal.length; j++) {
-						var restName = meal[j].Rest_Name;
-						var restAddress = meal[j].Rest_Address;
-						var foodID = meal[j].Food_Id;
-						var foodName = meal[j].Food_Name;
-						var cost = meal[j].Cost;
-						var count = meal[j].Count;
-						$(targetId2).append("<br>" +
-								"餐廳名稱:" + restName + "<br >餐廳地址:" + restAddress + "<br >食物名稱:" + foodName + "<br >食物編號:" + foodID + "<br >食物單價:" + cost + "<br >食物個數:" + count + "<br >"
-						);
-					}
-
-					$(targetId2).append("" +
-							"</div>" +
-							"<div class = 'modal-footer' >" +
-							"<button type = 'button' class= 'btn btn-secondary' data-dismiss = 'modal' >Close</button>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							"</div>"
-					);
-					//  加監聽 <!--監聽按鈕 實施.collapse('toggle')-->
-					var buttonTarget = "#collapseButton" + i;
-					$(buttonTarget).click(function () {
-						var target = "#" + this.id.split('collapseButton')[1];
-						$(target).collapse('toggle');
-					});
-				}
-			},
-			error: function () {}
-		});
-	});
-
 </script>
 	<head>
 		<title>海洋大學選課系統</title>
@@ -324,39 +179,72 @@
 						<div>
 							<p class = "word">開課系所</p>
 							<select id='faculty_name'>
+								<option value="商船學系(Merchant Marine)">商船學系</option>
+								<option value="航運管理學系(Shipping and Transportation Management)">航運管理學系</option>
+								<option value="運輸科學系(Transportation Science)">運輸科學系</option>
+								<option value="輪機工程學系能源應用組(Marine Engineering, Division of Energy Application)">輪機工程學系能源應用組</option>
+								<option value="輪機工程學系動力工程組(Marine Engineering, Division of Power Engineering)">輪機工程學系動力工程組</option>
+								<option value="海洋經營管理學士學位學程(Ocean Business Management)">海洋經營管理學士學位學程</option>
+								<option value="生命科學院(Life Sciences)">生命科學院</option>
+								<option value="食品科學系食品科學組(Food Science, Division of Food Science)">食品科學系食品科學組</option>
+								<option value="食品科學系生物科技組(Food Science, Division of Biotechnology)">食品科學系生物科技組</option>
+								<option value="水產養殖學系(Aquaculture)">水產養殖學系</option>
+								<option value="生命科學暨生物科技學系(Bioscience and Biotechnology)">生命科學暨生物科技學系</option>
+								<option value="海洋生物科技學士學位學程(Marine Biotechnology)">海洋生物科技學士學位學程</option>
+								<option value="海洋科學與資源學院(Ocean Science and Resource)">海洋科學與資源學院</option>
+								<option value="環境生物與漁業科學學系(Environmental Biology and Fisheries Science)">環境生物與漁業科學學系</option>
+								<option value="海洋環境資訊系(Marine Environmental Informatics)">海洋環境資訊系</option>
+								<option value="機械與機電工程學系(Mechanical and Mechatronic Engineering)">機械與機電工程學系</option>
+								<option value="系統工程暨造船學系(Systems Engineering and Naval Architecture)">系統工程暨造船學系</option>
+								<option value="河海工程學系(Harbor and River Engineering)">河海工程學系</option>
+								<option value="海洋工程科技學士學位學程(Ocean Engineering and Technology)">海洋工程科技學士學位學程</option>
+								<option value="電機工程學系(Electrical Engineering)">電機工程學系</option>
+								<option value="資訊工程學系(Computer Science and Engineering)">資訊工程學系</option>
+								<option value="通訊與導航工程學系(Communications, Navigation and Control Engineering)">通訊與導航工程學系</option>
+								<option value="光電與材料科技學系(Department of Optoelectronics and materials Technology)">光電與材料科技學系</option>
+								<option value="光電與材料科技學士學位學程(Bachelor Degree Program in Ocean Tourism Management Optoelectronics and Materials Technology )">光電與材料科技學士學位學程</option>
+								<option value="海洋文創設計產業學士學位學程(Oceanic Cultural Creative Design Industries)">海洋文創設計產業學士學位學程</option>
+								<option value="海洋觀光管理學士學位學程(Bachelor Degree Program in Ocean Tourism Management)">海洋觀光管理學士學位學程</option>
+								<option value="海洋法政學士學位學程(Bachelor Degree Program in Ocean Law and Policy)">海洋法政學士學位學程</option>
+								<option value="師資培育中心(Center of Teacher Education)">師資培育中心</option>
+								<option value="共同教育中心語文教育組(*)">共同教育中心語文教育組</option>
+								<option value="大學部英語課程(原外語中心)(*)">大學部英語課程(原外語中心)</option>
+								<option value="共同教育中心博雅教育組(*)">共同教育中心博雅教育組</option>
+								<option value="共同教育中心華語中心(*)">共同教育中心華語中心</option>
+								<option value="體育室(Office of Physical Education)">體育室</option>
+								<option value="軍訓室(Office of Military Education and Training)">軍訓室</option>
+								<option value="校際選課(*)">校際選課</option>
+								<option value="未來學院(*)">未來學院</option>
+								<option value="校際選課（臺北聯合大學系統）(*)">校際選課（臺北聯合大學系統）</option>
+								<option value="體育室(Office of Physical Education)">體育室</option>
 							</select>
 						</div>
 					</div>
 					<div class=" gallery">	
 						<div>
 							<p class = "word">授課教師</p>
-							<select id='professor'>
-							</select>
+							<input id="professor" type="text">
 						</div>
 						<div>
 							<p class = "word">上課時段</p>
-							<select id='schedule'>
-							</select>
+							<input id="schedule" type="text">
 						</div>
 					</div>
 					<div class=" gallery">
 						<div>
 							<p class = "word">主領域</p>
-							<select id='main_field'>
-							</select>
+							<input id='main_field' type="text">
 						</div>
 						
 						<div>
 							<p class = "word">子領域</p>
-							<select id='sub_field'>
-							</select>
+							<input id='sub_field' type="text">
 						</div>
 					</div>
 					<div class=" gallery">	
 						<div>
 							<p class = "word">上課地點</p>
-							<select id='classroom'>
-							</select>
+							<input id='classroom' type="text">
 						</div>
 						
 						<div>
@@ -372,8 +260,7 @@
 						
 						<div>
 							<p class = "word">選課類別</p>
-							<select id='category'>
-							</select>
+							<input id='category' type="text">
 						</div>
 					</div>
 					
@@ -381,82 +268,38 @@
 						<br>
 						<li><a href="javascript:search()" class="button special">搜尋</a></li>
 					</ul>
-					
 				</div>
-			</section>	
+			</section>
 
 		<!-- 小段黑色地帶 -->
 		<!-- Two -->
-			<section id="two" class="wrapper style3">
-				<div class="inner">
-					<header class="align-center">
-						<p>在你選好想要搜尋的選項後按下搜尋<br>
-						我們會將結果顯示在下方</p>
-						<h2>搜尋結果</h2>
-					</header>
-				</div>
-			</section>
+		<section id="two" class="wrapper style3">
+			<div class="inner">
+				<header class="align-center">
+					<p>在你選好想要搜尋的選項後按下搜尋<br>
+					我們會將結果顯示在下方</p>
+					<h2>搜尋結果</h2>
+				</header>
+			</div>
+		</section>
 
 		<!-- 清單 -->	
 		<div id ="search_results">
 		</div>
-		<!-- One
-			<section id="one" class="wrapper style2">
-				<div class="inner">
-					<div class="grid-style">
-
-						<div>
-							<div class="box">
-								<!-- <div class="image fit">
-									<img src="images/pic02.jpg" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<p>通識課</p>
-										<h2>優質企業人</h2>
-									</header>
-									<footer class="align-center">
-										<a href="#" class="button alt" id = "accordionExample">詳細資訊</a>
-									</footer>
-								</div>
-							</div>
-						</div>
-
-						<div>
-							<div class="box">
-								<div class="content">
-									<header class="align-center">
-										<p>通識課</p>
-										<h2>卓越大師</h2>
-									</header>
-									<footer class="align-center">
-										<a href="#" class="button alt">詳細資訊</a>
-									</footer>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</section>
-		-->
-			
-
 
 		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-					</ul>
-				</div>
-				<div class="copyright">
-					&copy; Untitled. All rights reserved.
-				</div>
-			</footer>
-		<!-- Scripts -->
+		<footer id="footer">
+			<div class="container">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+				</ul>
+			</div>
+			<div class="copyright">
+				&copy; Untitled. All rights reserved.
+			</div>
+		</footer>
 	</body>
 </html>

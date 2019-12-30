@@ -17,6 +17,10 @@ function setData(id, value) {
 
 // get information from database and display on web
 $(document).ready(function(){
+    // if no id and grade input, back to index
+    if(location.search == "") {
+        $(location).attr('href', 'index.html');
+    }
     // process input from url
     var search_str = location.search.substr(1);
     var search_array = search_str.split('&');
@@ -103,8 +107,9 @@ $(document).ready(function(){
 
     // get message and put in messages
     $.ajax({
-        url: "/api/messages/" + course_id,
+        url: "https://cis.ntouo.tw/api/messages/" + course_id,
         type: "GET",
+        async: false,
         success: function(response){
             messages = response;
         }
@@ -122,6 +127,32 @@ $(document).ready(function(){
 				"</div>"+
 			"</div>"
 		);
-	
 	}
+});
+
+$("#change").click(function() {
+    var search_str = location.search.substr(1);
+    var search_array = search_str.split('&');
+    var search_array0 = search_array[0].split('=');
+    var search_array1 = search_array[1].split('=');
+    var course_id = search_array0[1];
+    var grade = search_array1[1];
+    $(location).attr("href", "new.html?course_id=" + course_id + "&grade=" + grade);
+});
+
+$("delete").click(function() {
+    var search_str = location.search.substr(1);
+    var search_array = search_str.split('&');
+    var search_array0 = search_array[0].split('=');
+    var search_array1 = search_array[1].split('=');
+    var course_id = search_array0[1];
+    var grade = search_array1[1];
+
+    $.ajax({
+        url: "https://cis.ntouo.tw/api/course",
+        type: "DELETE",
+        success: function() {
+            
+        }
+    })
 });
