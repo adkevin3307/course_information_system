@@ -135,7 +135,8 @@ $(document).ready(function() {
 });
 
 // get user input -> check -> show
-$("#getData").click(function() {
+function click_send() {
+    console.log('click send button');
     // get input and put int var data
     input.year_semester = $("#year_semester").val();
     input.course_id = $("#course_id").val();
@@ -235,10 +236,12 @@ $("#getData").click(function() {
     setData("#eng_syllabus", input.eng_syllabus);
     setData("#chi_evaluation", input.chi_evaluation);
     setData("#eng_evaluation", input.eng_evaluation);
-})
+}
 
 // send all data to DB
 $("#send").click(function(){
+    console.log("send function run");
+    console.log(input);
     // send data
     if(location.search == "") { // add a course
         $.ajax({
