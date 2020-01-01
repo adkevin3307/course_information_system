@@ -14,6 +14,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+
+$(function(){
+        $('#click_search').click(function(){
+        $('html,body').animate({scrollTop:$('#search_results').offset().top},800);});
+		});
+
 	function search() {
 		var course_infos;
 		var course_id = ($('#course_id').val() == null) ? "" : $("#course_id").val() ;
@@ -266,7 +272,7 @@
 					
 					<ul align="center"class="actions">
 						<br>
-						<li><a href="javascript:search()" class="button special">搜尋</a></li>
+						<li><a href="javascript:search()" id ="click_search" class="button special">搜尋</a></li>
 					</ul>
 				</div>
 			</section>
