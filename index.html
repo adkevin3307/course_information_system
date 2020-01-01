@@ -18,6 +18,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/index.css" />
 	</head>
 	<body>
 		<!-- Header -->
@@ -161,7 +162,37 @@
 					</div>
 					<div>
 						<p class = "word">上課時段</p>
-						<input id="schedule" type="text">
+						<input id="schedule" type="text" disabled>
+						<select class='day'>
+							<option disabled selected>星期</option>
+							<option value = '1'>星期一</option>
+							<option value = '2'>星期二</option>
+							<option value = '3'>星期三</option>
+							<option value = '4'>星期四</option>
+							<option value = '5'>星期五</option>
+							<option value = '6'>星期六</option>
+							<option value = '7'>星期日</option>
+						</select>
+						<select class='time'>
+							<option disabled selected>節次</option>
+							<option value = '01'>01</option>
+							<option value = '02'>02</option>
+							<option value = '03'>03</option>
+							<option value = '04'>04</option>
+							<option value = '05'>05</option>
+							<option value = '06'>06</option>
+							<option value = '07'>07</option>
+							<option value = '08'>08</option>
+							<option value = '09'>09</option>
+							<option value = '10'>10</option>
+							<option value = '11'>11</option>
+							<option value = '12'>12</option>
+							<option value = '13'>13</option>
+							<option value = '14'>14</option>
+							<option value = '15'>15</option>
+							<option value = '16'>16</option>
+						</select>
+						<button id = 'add_schedule'>+</button>
 					</div>
 				</div>
 				<div class="gallery">

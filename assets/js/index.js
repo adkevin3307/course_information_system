@@ -1,3 +1,17 @@
+var query = [
+    'course_id',
+    'course_name',
+    'faculty_name',
+    'professor',
+    'schedule',
+    'main_field',
+    'sub_field',
+    'classroom',
+    'grade',
+    'category',
+    'description'
+];
+
 function append_url(query, value) {
     return (value ? (query + '=' + value + '&') : '');
 }
@@ -5,19 +19,6 @@ function append_url(query, value) {
 function search() {
     var courses_info;
     var url_str = 'https://cis.ntouo.tw/api/courses?';
-    var query = [
-        'course_id',
-        'course_name',
-        'faculty_name',
-        'professor',
-        'schedule',
-        'main_field',
-        'sub_field',
-        'classroom',
-        'grade',
-        'category',
-        'description'
-    ];
 
     for (i = 0; i < query.length; i++) {
         url_str += append_url(query[i], $('#' + query[i]).val());
@@ -35,14 +36,14 @@ function search() {
     $('#search_title').empty();
     $('#search_title').append(
         '<section id="two" class="wrapper style3">' +
-        '<div class="inner">' +
-        '<header class="align-center">' +
-        '<h2>搜尋結果</h2>' +
-        '</header>' +
-        '</div>' +
+            '<div class="inner">' +
+                '<header class="align-center">' +
+                    '<h2>搜尋結果</h2>' +
+                '</header>' +
+            '</div>' +
         '</section>'
     );
-    
+
     $('#search_results').empty();
     if (courses_info.length != 0) {
         $('#search_results').append(
@@ -75,21 +76,36 @@ function search() {
     }
 }
 
+function search_course() {
+    search();
+    $('html,body').animate({
+        scrollTop: $('#search_results').offset().top
+    }, 800);
+}
+
+function parse_add_schedule() {
+    var day = $('.day').val();
+    var time = $('.time').val();
+    if (day != null && time != null) {
+        if ($('#schedule').val()) $('#schedule').val($('#schedule').val() + ',' + day + time);
+        else $('#schedule').val(day + time);
+    }
+}
+
 $(function() {
-    function search_course() {
-        search();
-        $('html,body').animate({
-            scrollTop: $('#search_results').offset().top
-        }, 800);
+    $('#click_search').click(search_course);
+
+    for (i = 0; i < query.length; i++) {
+        $('#' + query[i]).keypress(function(e) {
+            var key = e.which;
+            if (key == 13) search_course();
+        });
     }
 
-    $('#click_search').click(function() {
-        search_course();
-    });
+    $('#add_schedule').click(parse_add_schedule);
 
-    $('#three').keypress(function(e) {
+    $('.day, .time').keypress(function(e) {
         var key = e.which;
-        // 13 => enter
-        if (key == 13) search_course();
+        if (key == 13) parse_add_schedule();
     });
 });
