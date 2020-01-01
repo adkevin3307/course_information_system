@@ -5,104 +5,21 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-	<script>
-		function append_url(query, value) {
-			return (value ? (query + '=' + value + '&') : '');
-		}
-
-		function search() {
-			var courses_info;
-			var url_str = 'https://cis.ntouo.tw/api/courses?';
-			var query = [
-				'course_id',
-				'course_name',
-				'faculty_name',
-				'professor',
-				'schedule',
-				'main_field',
-				'sub_field',
-				'classroom',
-				'grade',
-				'category',
-				'description'
-			];
-
-			for (i = 0; i < query.length; i++) {
-				url_str += append_url(query[i], $('#' + query[i]).val());
-			}
-
-			$.ajax({
-				url: url_str,
-				type: "GET",
-				async: false,
-				success: function(response) {
-					courses_info = response;
-				}
-			});
-			$('#search_results').empty();
-			$('#search_results').append(
-				"<section id='one' class='wrapper style2'>" +
-						"<div class='inner'>" +
-							"<div id = 'outputclass' class='grid-style'>" +
-							"</div>" +
-						"</div>" +
-				"</section>"
-			);
-			$('#outputclass').empty();
-			for(j = 0; j < courses_info.length; j++) {
-				$('#outputclass').append(
-					"<div>" +
-						"<div class='box'>" +
-							"<div class='content'>" +
-								"<header class='align-center'>" +
-									"<p>" + courses_info[j].main_field + "</p>" +
-									"<h2>" + courses_info[j].chi_course_name + "</h2>" +
-								"</header>" +
-								"<footer class='align-center'>" +
-									"<a href='generic.html?course_id=" + courses_info[j].course_id + "&grade=" + courses_info[j].grade + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
-								"</footer>" +
-							"</div>" +
-						"</div>" +
-					"</div>"
-				);
-			}
-		}
-
-		$(function() {
-			function search_course() {
-				search();
-				$('html,body').animate({
-					scrollTop: $('#search_results').offset().top
-				}, 800);
-			}
-
-			$('#click_search').click(function() {
-				search_course();
-			});
-
-			$('#three').keypress(function(e) {
-				var key = e.which;
-				// 13 => enter
-				if (key == 13) search_course();
-			});
-		});
-	</script>
 	<head>
 		<title>海洋大學選課系統</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/index.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body>
-
 		<!-- Header -->
 		<header id="header" class="alt">
 			<div class="logo"><a href="index.html">CIS <span>by ntouo</span></a></div>
@@ -289,23 +206,13 @@
 
 		<!-- 小段黑色地帶 -->
 		<!-- Two -->
-		<section id="two" class="wrapper style3">
-			<div class="inner">
-				<header class="align-center">
-					<p>
-						在你選好想要搜尋的選項後按下搜尋<br>
-						我們會將結果顯示在下方
-					</p>
-					<h2>搜尋結果</h2>
-				</header>
-			</div>
-		</section>
+		<div id = 'search_title'></div>
 
 		<!-- 清單 -->	
 		<div id ="search_results"></div>
 
 		<!-- Footer -->
-		<footer id="footer">
+		<!-- <footer id="footer">
 			<div class="container">
 				<ul class="icons">
 					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -317,6 +224,6 @@
 			<div class="copyright">
 				&copy; Untitled. All rights reserved.
 			</div>
-		</footer>
+		</footer> -->
 	</body>
 </html>
