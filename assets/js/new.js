@@ -138,6 +138,10 @@ $(document).ready(function() {
         $("#document").text("將每個項目的資料填入，完成後點擊送出。");
         $("#getData").text("新增");
     }
+
+    $('#cancel_modify').click(function() {
+        location.href = 'generic.html?course_id=' + course_info.course_id + '&grade=' + course_info.grade;
+    })
 });
 
 // get user input -> check -> show
