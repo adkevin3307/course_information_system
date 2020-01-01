@@ -260,6 +260,7 @@ function sendData(){
             success: function() {
                 // prompt is success
                 // return to home page
+                window.alert("新增課程成功");
                 $(location).attr('href', 'index.html');
             }
         });
