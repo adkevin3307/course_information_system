@@ -140,7 +140,7 @@ $("#change").click(function() {
     $(location).attr("href", "new.html?course_id=" + course_id + "&grade=" + grade);
 });
 
-$("delete").click(function() {
+$("#delete").click(function() {
     var search_str = location.search.substr(1);
     var search_array = search_str.split('&');
     var search_array0 = search_array[0].split('=');
@@ -149,10 +149,11 @@ $("delete").click(function() {
     var grade = search_array1[1];
 
     $.ajax({
-        url: "https://cis.ntouo.tw/api/course",
+        url: "https://cis.ntouo.tw/api/course/" + course_id + "/" + grade,
         type: "DELETE",
         success: function() {
-            
+            window.alert("課程刪除成功");
+            $(location).attr('href', 'index.html');
         }
     })
 });

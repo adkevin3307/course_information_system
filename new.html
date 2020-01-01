@@ -291,7 +291,7 @@
                             </tr>
                         </table>
                         <p align="center" style="margin:0">
-                            <button type='button' onclick="click()" class='button special' data-toggle='modal'data-target='#exampleModalCenter'>送出</button>
+                            <button type='button' id="getData" onclick="click_sends()" class='button special' data-toggle='modal'data-target='#exampleModalCenter'>送出</button>
                             <a href="index.html" class="button special">取消</a>
                         </p>
                     </p>
@@ -315,58 +315,64 @@
                                         <p>
                                             <table id="basic_info" style="word-wrap:break-word;table-layout:fixed;">
                                                 <tr>
+                                                    <td class="item_name" style="width: 25%;font-weight:bold;color:black">處理學期</td>
+                                                    <td id="out_year_semester" style="width: 25%;"></td>
                                                     <td class="item_name" style="width: 25%;font-weight:bold;color:black">課號</td>
-                                                    <td id="course_id" style="width: 25%;"></td>
-                                                    <td class="item_name" style="width: 25%;font-weight:bold;color:black">開課系所</td>
-                                                    <td id="faculty_name" style="width: 25%;"></td>
+                                                    <td id="out_course_id" style="width: 25%;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="item_name" style="width: 25%;font-weight:bold;color:black">中文課名</td>
+                                                    <td id="out_chi_course_name" style="width: 25%;"></td>
+                                                    <td class="item_name" style="width: 25%;font-weight:bold;color:black">英文課名</td>
+                                                    <td id="out_eng_course_name" style="width: 25%;"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">授課教師</td>
-                                                    <td id="professor"></td>
+                                                    <td id="out_professor"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">開課年班</td>
-                                                    <td id="grade"></td>
+                                                    <td id="out_grade"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">學分</td>
-                                                    <td id="credit"></td>
+                                                    <td id="out_credit"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">時數</td>
-                                                    <td id="hour"></td>
+                                                    <td id="out_hour"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">人數上限</td>
-                                                    <td id="max_students"></td>
+                                                    <td id="out_max_students"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">人數下限</td>
-                                                    <td id="min_students"></td>
+                                                    <td id="out_min_students"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="item_name" style="font-weight:bold;color:black">選課人數</td>
-                                                    <td id="students"></td>
+                                                    <td class="item_name" style="font-weight:bold;color:black">開課系所</td>
+                                                    <td id="out_faculty_name"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">是否實習</td>
-                                                    <td id="internship"></td>
+                                                    <td id="out_internship"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">選課類別</td>
-                                                    <td id="category"></td>
+                                                    <td id="out_category"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">開課期限</td>
-                                                    <td id="duration"></td>
+                                                    <td id="out_duration"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">上課時間</td>
-                                                    <td id="class_schedule"></td>
+                                                    <td id="out_class_schedule"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">上課地點</td>
-                                                    <td id="classroom"></td>
+                                                    <td id="out_classroom"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">主領域</td>
-                                                    <td id="main_field"></td>
+                                                    <td id="out_main_field"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">子領域</td>
-                                                    <td id="sub_field"></td>
+                                                    <td id="out_sub_field"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">備註</td>
-                                                    <td id="description"></td>
+                                                    <td id="out_description"></td>
                                                     <td class="item_name" style="font-weight:bold;color:black">合授教師</td>
-                                                    <td id="co_professors"></td>
+                                                    <td id="out_co_professors"></td>
                                                 </tr>
                                             </table>
                                         </p>
@@ -385,56 +391,56 @@
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="chi_objective"></td>
-                                                    <td id="eng_objective"></td>
+                                                    <td id="out_chi_objective"></td>
+                                                    <td id="out_eng_objective"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">先修科目</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="chi_pre_course"></td>
-                                                    <td id="eng_pre_course"></td>
+                                                    <td id="out_chi_pre_course"></td>
+                                                    <td id="out_eng_pre_course"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">教材內容</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="chi_outline"></td>
-                                                    <td id="eng_outline"></td>
+                                                    <td id="out_chi_outline"></td>
+                                                    <td id="out_eng_outline"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">教學方式</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="chi_teaching_method"></td>
-                                                    <td id="eng_teaching_method"></td>
+                                                    <td id="out_chi_teaching_method"></td>
+                                                    <td id="out_eng_teaching_method"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">參考書目</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="chi_reference"></td>
-                                                    <td id="eng_reference"></td>
+                                                    <td id="out_chi_reference"></td>
+                                                    <td id="out_eng_reference"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">教學進度</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="chi_syllabus"></td>
-                                                    <td id="eng_syllabus"></td>
+                                                    <td id="out_chi_syllabus"></td>
+                                                    <td id="out_eng_syllabus"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="item_name" style="font-weight:bold;color:black">評量方式</td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="chi_evaluation"></td>
-                                                    <td id="eng_evaluation"></td>
+                                                    <td id="out_chi_evaluation"></td>
+                                                    <td id="out_eng_evaluation"></td>
                                                 </tr>
                                             </table>
                                         </p>
@@ -442,7 +448,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">繼續輸入</button>
-                                    <button type="button" id="send" class="btn btn-primary">送出資料</button>
+                                    <button type="button" onclick="sendData()" class="btn btn-primary">送出資料</button>
                                 </div>
                             </div>
                         </div>
