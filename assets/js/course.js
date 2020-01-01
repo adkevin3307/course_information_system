@@ -32,7 +32,7 @@ $(document).ready(function(){
     // get course all information by primary key(course_id, grade) and put in course_info
     $.ajax({
         url: "https://cis.ntouo.tw/api/courses?course_id=" + course_id + "&grade=" + grade,
-        type: "get",
+        type: "GET",
         async: false,
         success: function(response){
             course_infos = response;
@@ -151,9 +151,10 @@ $("#delete").click(function() {
     $.ajax({
         url: "https://cis.ntouo.tw/api/course/" + course_id + "/" + grade,
         type: "DELETE",
+        async: false,
         success: function() {
             window.alert("課程刪除成功");
-            $(location).attr('href', 'index.html');
+            location.href = 'index.html';
         }
     })
 });
