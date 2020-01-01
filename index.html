@@ -48,7 +48,7 @@
 				console.log(course_infos);
 			}
     	});
-
+		$('#search_results').empty()
 		$('#search_results').append(
 			"<section id='one' class='wrapper style2'>"+
 					"<div class='inner'>"+
@@ -58,7 +58,7 @@
 					"</div>"+
 			"</section>"
 		);
-		
+		$('#outputclass').empty()
 		for(j = 0; j < course_infos.length; j++) {
 			$('#outputclass').append(
 				"<div>" +
