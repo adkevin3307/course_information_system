@@ -14,15 +14,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 	<script>
-
-		$(function() {
-			$('#click_search').click(function() {
-				$('html,body').animate({
-					scrollTop: $('#search_results').offset().top
-				}, 800);
-			});
-		});
-
 		function append_url(query, value) {
 			return (value ? (query + '=' + value + '&') : '');
 		}
@@ -84,6 +75,25 @@
 				);
 			}
 		}
+
+		$(function() {
+			function search_course() {
+				search();
+				$('html,body').animate({
+					scrollTop: $('#search_results').offset().top
+				}, 800);
+			}
+
+			$('#click_search').click(function() {
+				search_course();
+			});
+
+			$('#three').keypress(function(e) {
+				var key = e.which;
+				// 13 => enter
+				if (key == 13) search_course();
+			});
+		});
 	</script>
 	<head>
 		<title>海洋大學選課系統</title>
@@ -158,7 +168,7 @@
 		</section>
 			
 		<!-- 搜尋選項 -->
-		<!-- 課程名稱(中英文)  開課系所  授課教師  上課時段  主領域  子領域  上課地點  開課年級  備註  選課類別  克號(單一查詢) -->
+		<!-- 課程名稱(中英文)  開課系所  授課教師  上課時段  主領域  子領域  上課地點  開課年級  備註  選課類別  課號(單一查詢) -->
 		<!-- Three -->
 		<section id="three" class="wrapper style2">
 			<div class="inner">
@@ -170,20 +180,18 @@
 					<h2>搜尋選項</h2>
 				</header>
 				<div class="align-center">
-				<div>
 					<div>
-						<p class = "word">課號</p>
-						<input id="course_id" type="text"/>
+						<div>
+							<p class = "word">課號</p>
+							<input id="course_id" type="text"/>
+						</div>
 					</div>
 				</div>
-				</div>
-				<div class=" gallery">
-				
+				<div class="gallery">
 					<div>
 						<p class = "word">課程名稱</p>
 						<input id="course_name" type="text"/>
 					</div>
-				
 					<div>
 						<p class = "word">開課系所</p>
 						<select id='faculty_name'>
@@ -229,7 +237,7 @@
 						</select>
 					</div>
 				</div>
-				<div class=" gallery">	
+				<div class="gallery">	
 					<div>
 						<p class = "word">授課教師</p>
 						<input id="professor" type="text">
@@ -239,7 +247,7 @@
 						<input id="schedule" type="text">
 					</div>
 				</div>
-				<div class=" gallery">
+				<div class="gallery">
 					<div>
 						<p class = "word">主領域</p>
 						<input id='main_field' type="text">
@@ -250,7 +258,7 @@
 						<input id='sub_field' type="text">
 					</div>
 				</div>
-				<div class=" gallery">	
+				<div class="gallery">	
 					<div>
 						<p class = "word">上課地點</p>
 						<input id='classroom' type="text">
@@ -261,7 +269,7 @@
 						<input type="text" id='grade'>
 					</div>
 				</div>
-				<div class=" gallery">	
+				<div class="gallery">	
 					<div>
 						<p class = "word">備註</p>
 						<input id="description" type="text"/>
@@ -273,9 +281,8 @@
 					</div>
 				</div>
 				
-				<ul align="center"class="actions">
-					<br>
-					<li><a href="javascript:search()" id ="click_search" class="button special">搜尋</a></li>
+				<ul align="center" class="actions">
+					<br><button id = 'click_search' class = 'button special'>搜尋</button>
 				</ul>
 			</div>
 		</section>
