@@ -146,9 +146,8 @@ $(document).ready(function() {
 
 // get user input -> check -> show
 function click_sends() {
-    console.log('click send button');
     // get input and put int var data
-    input.year_semester = $("#year_semester").val();
+    input.year_semester = parseInt($("#year_semester").val());
     input.course_id = $("#course_id").val();
     input.chi_course_name = $("#chi_course_name").val();
     input.eng_course_name = $("#eng_course_name").val();
@@ -162,7 +161,7 @@ function click_sends() {
     input.internship = ($("#internship").val() === "true");
     input.category = $("#category").val();
     input.duration = $("#duration").val();
-    input.schedule = string2array($("#schedule").val()).map(Number);
+    input.schedule = $("#schedule").val().map(Number);
     input.classroom = string2array($("#classroom").val());
     input.main_field = $("#main_field").val();
     input.sub_field = $("#sub_field").val();
@@ -183,8 +182,6 @@ function click_sends() {
     input.eng_syllabus = $("#eng_syllabus").val();
     input.chi_evaluation = $("#chi_evaluation").val();
     input.eng_evaluation = $("#eng_evaluation").val();
-    console.log(input);
-    // check data
     // output for user check
     setData("#out_year_semester", input.year_semester);
     setData("#out_eng_course_name", input.eng_course_name);
@@ -206,19 +203,8 @@ function click_sends() {
     }
     setData("#out_category", input.category);
     setData("#out_duration", input.duration);
-    // schedule and classroom
-    var schedule_content = "";
-    var classroom_content = "";
-    for (let i = 0; i < input.schedule.length; i++) {
-        schedule_content += input.schedule[i];
-        classroom_content += input.classroom[i];
-        if(i != input.schedule.length - 1) {
-            schedule_content += ",";
-            classroom_content += ",";
-        }
-    }
-    setData("#out_class_schedule", schedule_content);
-    setData("#out_classroom", classroom_content);
+    setData("#out_class_schedule", input.schedule);
+    setData("#out_classroom", input.classroom);
 
     setData("#out_main_field", input.main_field);
     setData("#out_sub_field", input.sub_field);
@@ -252,8 +238,6 @@ function click_sends() {
 
 // send all data to DB
 function sendData(){
-    console.log("send function run");
-    console.log(input);
     // send data
     if(location.search == "") { // add a course
         $.ajax({
@@ -262,8 +246,6 @@ function sendData(){
             async: false,
             data: input,
             success: function() {
-                // prompt is success
-                // return to home page
                 window.alert("新增課程成功");
                 $(location).attr('href', 'index.html');
             }
@@ -282,9 +264,7 @@ function sendData(){
             async: false,
             data: input,
             success: function(response) {
-                // prompt is success
-                // return to home page
-                console.log(response);
+                window.alert("修改課程成功");
                 $(location).attr('href', 'index.html');
             }
         });

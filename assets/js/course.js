@@ -62,18 +62,25 @@ $(document).ready(function(){
     }
     setData("#category", course_info.category);
     setData("#duration", course_info.duration);
-    // schedule and classroom
+    // schedule
     var schedule_content = "";
-    var classroom_content = "";
     for (let i = 0; i < course_info.schedule.length; i++) {
         schedule_content += course_info.schedule[i];
-        classroom_content += course_info.classroom[i];
+        
         if(i != course_info.schedule.length - 1) {
             schedule_content += ",";
             classroom_content += ",";
         }
     }
     setData("#class_schedule", schedule_content);
+    // classroom
+    var classroom_content = "";
+    for(let i = 0; i < course_info.classroom.length; i++) {
+        classroom_content += course_info.classroom[i];
+        if(i != course_info.classroom.length - 1) {
+            classroom_content += ",";
+        }
+    }
     setData("#classroom", classroom_content);
 
     setData("#main_field", course_info.main_field);
@@ -114,7 +121,7 @@ function readMessage() {
     var message_info;
     // get messages data
     $.ajax({
-        url: "https://cis.ntouo.tw/api/messages/" + course_id,
+        url: "https://cis.ntouo.tw/api/messages/" + course_id + "/" + grade,
         type: "GET",
         async: false,
         success: function(response) {
@@ -133,13 +140,16 @@ function readMessage() {
 
 // function for create message
 $("#send_message").click(function() {
-    var message_content;
-    message_content = $("#message_input").val();
+    var message = {
+        "course_id" : course_id,
+        "grade" : grade,
+        "content" : $("#message_input").val()
+    };
     $.ajax({
         url: "https://cis.ntouo.tw/api/message",
         type: "POST",
         async: false,
-        data: message_content,
+        data: message,
         success: function() {
             location.reload();
         }
@@ -153,13 +163,18 @@ $("#change").click(function() {
 
 // function for delete this course
 $("#delete").click(function() {
-    $.ajax({
-        url: "https://cis.ntouo.tw/api/course/" + course_id + "/" + grade,
-        type: "DELETE",
-        async: false,
-        success: function() {
-            window.alert("課程刪除成功");
-            location.href = 'index.html';
-        }
-    })
+    if(window.confirm("真的要刪除本課程ㄇ?")) {
+        $.ajax({
+            url: "https://cis.ntouo.tw/api/course/" + course_id + "/" + grade,
+            type: "DELETE",
+            async: false,
+            success: function() {
+                window.alert("課程刪除成功");
+                location.href = 'index.html';
+            }
+        })
+    }
+    else {
+        return;
+    } 
 });
