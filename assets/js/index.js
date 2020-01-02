@@ -83,15 +83,6 @@ function search_course() {
     }, 800);
 }
 
-function parse_add_schedule() {
-    var day = $('.day').val();
-    var time = $('.time').val();
-    if (day != null && time != null) {
-        if ($('#schedule').val()) $('#schedule').val($('#schedule').val() + ',' + day + time);
-        else $('#schedule').val(day + time);
-    }
-}
-
 $(function() {
     $('#click_search').click(search_course);
 
@@ -101,11 +92,4 @@ $(function() {
             if (key == 13) search_course();
         });
     }
-
-    $('#add_schedule').click(parse_add_schedule);
-
-    $('.day, .time').keypress(function(e) {
-        var key = e.which;
-        if (key == 13) parse_add_schedule();
-    });
 });
