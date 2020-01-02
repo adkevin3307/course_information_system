@@ -6,7 +6,7 @@ FUNCTION:
 */
 
 var input = {
-    "course_id" : "",
+    "course_id": "",
     "grade": "",
     "professor": "",
     "year_semester": "",
@@ -32,14 +32,14 @@ var input = {
     "chi_outline": "",
     "eng_outline": "",
     "chi_teaching_method": "",
-    "eng_teaching_method": "" ,
+    "eng_teaching_method": "",
     "chi_reference": "",
     "eng_reference": "",
     "chi_syllabus": "",
     "eng_syllabus": "",
     "chi_evaluation": "",
     "eng_evaluation": "",
-    "reference_link":　"",
+    "reference_link": "",
     "schedule": [],
     "classroom": [],
     "co_professors": []
@@ -47,7 +47,7 @@ var input = {
 
 // check if there is data and set data in web
 function setData(id, value) {
-    if(value == null) {
+    if (value == null) {
         $(id).text("");
     }
     else {
@@ -57,12 +57,12 @@ function setData(id, value) {
 
 // string to array
 function string2array(str) {
-    return str.split(",");
+    return (str.includes(',') ? str.split(',') : [str]);
 }
 
 // Judge if new.html is used for new course or modify
-$(document).ready(function() {
-    if(location.search != "") {  // change a course
+$(document).ready(function () {
+    if (location.search != "") {  // change a course
         // change title ,document and button
         $("title").text("修改課程");
         $("#title").text("修改");
@@ -82,7 +82,7 @@ $(document).ready(function() {
             url: "https://cis.ntouo.tw/api/courses?course_id=" + course_id + "&grade=" + grade,
             type: "get",
             async: false,
-            success: function(response) {
+            success: function (response) {
                 course_infos = response;
             }
         });
@@ -99,13 +99,13 @@ $(document).ready(function() {
         $("#max_students").val(course_info.max_students);
         $("#min_students").val(course_info.min_students);
         $("#faculty_name").val(course_info.faculty_name);
-        if(course_info.internship){
+        if (course_info.internship) {
             $("#internship").val("true");
         }
         else {
             $("#intership").val("false");
         }
-        
+
         $("#category").val(course_info.category);
         $("#duration").val(course_info.duration);
         $("#schedule").val(course_info.schedule);
@@ -139,7 +139,7 @@ $(document).ready(function() {
         $("#getData").text("新增");
     }
 
-    $('#cancel_modify').click(function() {
+    $('#cancel_modify').click(function () {
         location.href = 'generic.html?course_id=' + course_info.course_id + '&grade=' + course_info.grade;
     })
 });
@@ -162,7 +162,7 @@ function click_sends() {
     input.internship = ($("#internship").val() === "true");
     input.category = $("#category").val();
     input.duration = $("#duration").val();
-    if($("#schedule").val() == null) {
+    if ($("#schedule").val() == null) {
         window.alert("請確認輸入!!");
         return;
     }
@@ -189,7 +189,7 @@ function click_sends() {
     input.eng_syllabus = $("#eng_syllabus").val();
     input.chi_evaluation = $("#chi_evaluation").val();
     input.eng_evaluation = $("#eng_evaluation").val();
-    if(checkData()==true) {
+    if (checkData() == true) {
         $('#trigger_modal').trigger('click');
     }
     else {
@@ -209,7 +209,7 @@ function click_sends() {
     setData("#out_max_students", input.max_students);
     setData("#out_min_students", input.min_students);
     setData("#out_students", input.students + "人 (此人數為最近一次查詢時人數)");
-    if(input.internship) {
+    if (input.internship) {
         $("#out_internship").text("是");
     }
     else {
@@ -253,42 +253,42 @@ function click_sends() {
 // check input data
 function checkData() {
     // check required
-    if($("#year_semester").val()=="") return false;
-    if($("#course_id").val()=="") return false;
-    if($("#chi_course_name").val()=="") return false;
-    if($("#eng_course_name").val()=="") return false;
-    if($("#professor").val()=="") return false;
-    if($("#grade").val()=="") return false;
-    if($("#credit").val()=="") return false;
-    if($("#hour").val()=="") return false;
-    if($("#max_students").val()=="") return false;
-    if($("#min_students").val()=="") return false;
-    if($("#faculty_name").val()=="") return false;
-    if($("#internship").val()=="") return false;
-    if($("#category").val()=="") return false;
-    if($("#duration").val()=="") return false;
-    if($("#schedule").val()=="") return false;
-    if($("#classroom").val()=="") return false;
-    if($("#main_field").val()=="") return false;
-    if($("#sub_field").val()=="") return false;
+    if ($("#year_semester").val() == "") return false;
+    if ($("#course_id").val() == "") return false;
+    if ($("#chi_course_name").val() == "") return false;
+    if ($("#eng_course_name").val() == "") return false;
+    if ($("#professor").val() == "") return false;
+    if ($("#grade").val() == "") return false;
+    if ($("#credit").val() == "") return false;
+    if ($("#hour").val() == "") return false;
+    if ($("#max_students").val() == "") return false;
+    if ($("#min_students").val() == "") return false;
+    if ($("#faculty_name").val() == "") return false;
+    if ($("#internship").val() == "") return false;
+    if ($("#category").val() == "") return false;
+    if ($("#duration").val() == "") return false;
+    if ($("#schedule").val() == "") return false;
+    if ($("#classroom").val() == "") return false;
+    if ($("#main_field").val() == "") return false;
+    if ($("#sub_field").val() == "") return false;
 
     // each check
-    if(isNaN($("#year_semester").val()) || $("#year_semester").val() > 1500 || $("#year_semester").val() < 1000) return false;
-    if(isNaN($("#max_students").val()) || $("#max_students").val() < 0) return false;
-    if(isNaN($("#min_students").val()) || $("#min_students").val() < 0) return false;
+    if (isNaN($("#year_semester").val()) || $("#year_semester").val() > 1500 || $("#year_semester").val() < 1000) return false;
+    if (isNaN($("#max_students").val()) || $("#max_students").val() < 0) return false;
+    if (isNaN($("#min_students").val()) || $("#min_students").val() < 0) return false;
     return true;
 }
 
 // send all data to DB
-function sendData(){
+function sendData() {
     // send data
-    if(location.search == "") { // add a course
+    if (location.search == "") { // add a course
         $.ajax({
             url: "https://cis.ntouo.tw/api/course",
             type: "POST",
             async: false,
             data: input,
-            success: function() {
+            success: function () {
                 window.alert("新增課程成功");
                 $(location).attr('href', 'index.html');
             }
@@ -306,7 +306,7 @@ function sendData(){
             type: "PUT",
             async: false,
             data: input,
-            success: function(response) {
+            success: function (response) {
                 window.alert("修改課程成功");
                 $(location).attr('href', 'index.html');
             }
