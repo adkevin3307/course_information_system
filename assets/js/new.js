@@ -146,7 +146,7 @@ $(document).ready(function() {
 
 // get user input -> check -> show
 function click_sends() {
-    // $('#trigger_modal').trigger('click');
+    console.log("run click_sends");
     // get input and put int var data
     input.year_semester = parseInt($("#year_semester").val());
     input.course_id = $("#course_id").val();
@@ -162,7 +162,13 @@ function click_sends() {
     input.internship = ($("#internship").val() === "true");
     input.category = $("#category").val();
     input.duration = $("#duration").val();
-    input.schedule = $("#schedule").val().map(Number);
+    if($("#schedule").val() == null) {
+        window.alert("請確認輸入!!");
+        return;
+    }
+    else {
+        input.schedule = $("#schedule").val().map(Number);
+    }
     input.classroom = string2array($("#classroom").val());
     input.main_field = $("#main_field").val();
     input.sub_field = $("#sub_field").val();
@@ -183,6 +189,13 @@ function click_sends() {
     input.eng_syllabus = $("#eng_syllabus").val();
     input.chi_evaluation = $("#chi_evaluation").val();
     input.eng_evaluation = $("#eng_evaluation").val();
+    if(checkData()==true) {
+        $('#trigger_modal').trigger('click');
+    }
+    else {
+        window.alert("請確認輸入!!");
+        return;
+    }
     // output for user check
     setData("#out_year_semester", input.year_semester);
     setData("#out_eng_course_name", input.eng_course_name);
@@ -235,6 +248,35 @@ function click_sends() {
     setData("#out_eng_syllabus", input.eng_syllabus);
     setData("#out_chi_evaluation", input.chi_evaluation);
     setData("#out_eng_evaluation", input.eng_evaluation);
+}
+
+// check input data
+function checkData() {
+    // check required
+    if($("#year_semester").val()=="") return false;
+    if($("#course_id").val()=="") return false;
+    if($("#chi_course_name").val()=="") return false;
+    if($("#eng_course_name").val()=="") return false;
+    if($("#professor").val()=="") return false;
+    if($("#grade").val()=="") return false;
+    if($("#credit").val()=="") return false;
+    if($("#hour").val()=="") return false;
+    if($("#max_students").val()=="") return false;
+    if($("#min_students").val()=="") return false;
+    if($("#faculty_name").val()=="") return false;
+    if($("#internship").val()=="") return false;
+    if($("#category").val()=="") return false;
+    if($("#duration").val()=="") return false;
+    if($("#schedule").val()=="") return false;
+    if($("#classroom").val()=="") return false;
+    if($("#main_field").val()=="") return false;
+    if($("#sub_field").val()=="") return false;
+
+    // each check
+    if(isNaN($("#year_semester").val()) || $("#year_semester").val() > 1500 || $("#year_semester").val() < 1000) return false;
+    if(isNaN($("#max_students").val()) || $("#max_students").val() < 0) return false;
+    if(isNaN($("#min_students").val()) || $("#min_students").val() < 0) return false;
+    return true;
 }
 
 // send all data to DB

@@ -67,7 +67,7 @@ function search() {
                             "<h2>" + courses_info[j].chi_course_name + "</h2>" +
                         "</header>" +
                         "<footer class='align-center'>" +
-                            "<a href='generic.html?course_id=" + courses_info[j].course_id + "&grade=" + courses_info[j].grade + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
+                            "<a href='course.html?course_id=" + courses_info[j].course_id + "&grade=" + courses_info[j].grade + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
                         "</footer>" +
                     "</div>" +
                 "</div>" +
