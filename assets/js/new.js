@@ -146,6 +146,7 @@ $(document).ready(function() {
 
 // get user input -> check -> show
 function click_sends() {
+    // $('#trigger_modal').trigger('click');
     // get input and put int var data
     input.year_semester = parseInt($("#year_semester").val());
     input.course_id = $("#course_id").val();
