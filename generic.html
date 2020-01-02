@@ -46,7 +46,11 @@
 					<div class="box">
 						<div class="content">
 							<header class="align-center">
-								<h2>課程基本資訊</h2>
+								<h2>
+									課程基本資訊
+									<input type="button" id="change" value="修改課程" style="float:right;">
+									<input type="button" id="delete" value="刪除課程" style="float:right">
+								</h2>
 							</header>
 							<p>
 								<table id="basic_info" style="word-wrap:break-word;table-layout:fixed;">
@@ -173,10 +177,15 @@
 										<td id="eng_evaluation"></td>
 									</tr>
 								</table>
-								<footer class="align-center">
-									<input type="button" id="change" value="修改課程">
-									<input type="button" id="delete" value="刪除課程">
-								</footer>
+
+								<!--留言版-->
+								<header class="align-center">
+									<h2>留言板</h2>
+								</header>
+								<table id="messages_table">
+								</table>
+								<input type="text" id="message_input" style="width:85%;float:left" place>
+								<input type="button" id="send_message" value="我要留言" style="float:right">
 							</p>
 						</div>
 					</div>

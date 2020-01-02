@@ -3,8 +3,8 @@ this js is used to get course's all information by the course_id and grade(gived
 */
 
 var course_infos; // store courses information we get from DB
-var messages;
-
+var course_id;
+var grade;
 // check if there is data and set data in web
 function setData(id, value) {
     if(value == null) {
@@ -26,8 +26,8 @@ $(document).ready(function(){
     var search_array = search_str.split('&');
     var search_array0 = search_array[0].split('=');
     var search_array1 = search_array[1].split('=');
-    var course_id = search_array0[1];
-    var grade = search_array1[1];
+    course_id = search_array0[1];
+    grade = search_array1[1];
 
     // get course all information by primary key(course_id, grade) and put in course_info
     $.ajax({
@@ -39,7 +39,7 @@ $(document).ready(function(){
         }
     });
     var course_info = course_infos[0]; // turn array of course into a course
-    console.log(typeof course_info);
+    console.log(course_info);
 
     // set course data into web page
     setData("#course_name_en", course_info.eng_course_name);
@@ -105,49 +105,54 @@ $(document).ready(function(){
     setData("#chi_evaluation", course_info.chi_evaluation);
     setData("#eng_evaluation", course_info.eng_evaluation);
 
-    // get message and put in messages
+    readMessage();
+});
+
+// read messages and show
+function readMessage() {
+    
+    var message_info;
+    // get messages data
     $.ajax({
         url: "https://cis.ntouo.tw/api/messages/" + course_id,
         type: "GET",
         async: false,
-        success: function(response){
-            messages = response;
+        success: function(response) {
+            message_info = response;
         }
     });
+    // show messages
+    if(message_info.length == 0) {
+        $("#messages_table").append("<tr><td>本課程尚無留言</td></tr>");
+        return;
+    }
+    for (let i = 0; i < message_info.length; i++) {
+        $("#messages_table").append("<tr><td>" + message_info[i].content +"</td></tr>");
+    }
+}
 
-    for(let i = 0; i < messages.length; i++) {
-		$('#outputclass').append(
-			"<div>"+
-				"<div class='box'>"+
-					"<div class='content'>"+
-						"<header class='align-center'>"+
-							"<p>" + messages[i].content + "</p>"+
-						"</header>"+
-					"</div>"+
-				"</div>"+
-			"</div>"
-		);
-	}
-});
+// function for create message
+$("#send_message").click(function() {
+    var message_content;
+    message_content = $("#message_input").val();
+    $.ajax({
+        url: "https://cis.ntouo.tw/api/message",
+        type: "POST",
+        async: false,
+        data: message_content,
+        success: function() {
+            location.reload();
+        }
+    });
+})
 
+// button link to change this course page
 $("#change").click(function() {
-    var search_str = location.search.substr(1);
-    var search_array = search_str.split('&');
-    var search_array0 = search_array[0].split('=');
-    var search_array1 = search_array[1].split('=');
-    var course_id = search_array0[1];
-    var grade = search_array1[1];
     $(location).attr("href", "new.html?course_id=" + course_id + "&grade=" + grade);
 });
 
+// function for delete this course
 $("#delete").click(function() {
-    var search_str = location.search.substr(1);
-    var search_array = search_str.split('&');
-    var search_array0 = search_array[0].split('=');
-    var search_array1 = search_array[1].split('=');
-    var course_id = search_array0[1];
-    var grade = search_array1[1];
-
     $.ajax({
         url: "https://cis.ntouo.tw/api/course/" + course_id + "/" + grade,
         type: "DELETE",
