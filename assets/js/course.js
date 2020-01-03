@@ -113,6 +113,13 @@ $(document).ready(function(){
     setData("#eng_evaluation", course_info.eng_evaluation);
 
     readMessage();
+
+    $('#message_input').keypress(function(e) {
+        var key = e.which;
+        if (key == 13) {
+            $('#send_message').trigger('click');
+        }
+    });
 });
 
 // read messages and show

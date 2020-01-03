@@ -5,363 +5,218 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-	<head>
-		<title>海洋大學選課系統</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/skel.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-		<script src="assets/js/index.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/index.css" />
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-	</head>
-	<body>
-		<!-- Header -->
-		<header id="header" class="alt">
-			<div class="logo"><a href="index.html">CIS <span>by ntouo</span></a></div>
-			<a href="#menu">Menu</a>
-		</header>
 
-		<!-- Nav -->
-		<nav id="menu">
-			<ul class="links">
-				<li><a href="index.html">首頁</a></li>
-				<li><a href="new.html">新增課程</a></li>
-			</ul>
-		</nav>
-			
-		<!-- 最頂端的跑馬燈 -->
-		<!-- Banner -->
-		<section class="banner full">
-			<article>
-				<img src="images/slide01.jpg" alt="" />
-				<div class="inner">
-					<header>
-						<p>歡迎使用 <a href="https://templated.co">選課系統</a></p>
-						<h2>海洋大學選課系統</h2>
-					</header>
-				</div>
-			</article>
-			<article>
-				<img src="images/slide02.jpg" alt="" />
-				<div class="inner">
-					<header>
-						<p>你能夠透過下方的選項去選擇出你想查詢的課程</p>
-						<h2>新增</h2>
-					</header>
-				</div>
-			</article>
-			<article>
-				<img src="images/slide03.jpg"  alt="" />
-				<div class="inner">
-					<header>
-						<p>你所蒐尋的課程將會呈現於網頁的下方</p>
-						<h2>清單</h2>
-					</header>
-				</div>
-			</article>
-			<article>
-				<img src="images/slide04.jpg"  alt="" />
-				<div class="inner">
-					<header>
-						<p>你能夠透過點選課程的詳細資訊去得到更多的課程資訊亦或是修改他</p>
-						<h2>詳細資訊</h2>
-					</header>
-				</div>
-			</article>
-			<article>
-				<img src="images/slide05.jpg"  alt="" />
-				<div class="inner">
-					<header>
-						<p>你能夠在課程清單裡去新增你對這堂課程的留言亦或是察看他人對這堂課的留言</p>
-						<h2>留言功能</h2>
-					</header>
-				</div>
-			</article>
-		</section>
-			
-		<!-- 搜尋選項 -->
-		<!-- 課程名稱(中英文)  開課系所  授課教師  上課時段  主領域  子領域  上課地點  開課年級  備註  選課類別  課號(單一查詢) -->
-		<!-- Three -->
-		<section id="three" class="wrapper style2">
+<head>
+	<title>海洋大學選課系統</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/index.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+	<script src="assets/js/schedule.js"></script>
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/schedule.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+</head>
+
+<body>
+	<!-- Header -->
+	<header id="header" class="alt">
+		<div class="logo"><a href="index.html">CIS <span>by ntouo</span></a></div>
+		<a href="#menu">Menu</a>
+	</header>
+
+	<!-- Nav -->
+	<nav id="menu">
+		<ul class="links">
+			<li><a href="index.html">首頁</a></li>
+			<li><a href="new.html">新增課程</a></li>
+		</ul>
+	</nav>
+
+	<!-- 最頂端的跑馬燈 -->
+	<!-- Banner -->
+	<section class="banner full">
+		<article>
+			<img src="images/slide01.jpg" alt="" />
 			<div class="inner">
-				<header class="align-center">
-					<p class="special">
-						你能夠依據你所喜歡的選項去選擇<br>
-						找出你所想要找尋的課程
-					</p>
-					<h2>搜尋選項</h2>
+				<header>
+					<p>歡迎使用 <a href="https://templated.co">選課系統</a></p>
+					<h2>海洋大學選課系統</h2>
 				</header>
-				<div class="align-center">
-					<div>
-						<div>
-							<p class = "word">課號</p>
-							<input id="course_id" type="text"/>
-						</div>
-					</div>
-				</div>
-				<div class="gallery">
-					<div>
-						<p class = "word">課程名稱</p>
-						<input id="course_name" type="text"/>
-					</div>
-					<div>
-						<p class = "word">開課系所</p>
-						<select id='faculty_name'>
-							<option selected value = ''>-- 請選擇學系 --</option>
-							<option value="商船學系(Merchant Marine)">商船學系</option>
-							<option value="航運管理學系(Shipping and Transportation Management)">航運管理學系</option>
-							<option value="運輸科學系(Transportation Science)">運輸科學系</option>
-							<option value="輪機工程學系能源應用組(Marine Engineering, Division of Energy Application)">輪機工程學系能源應用組</option>
-							<option value="輪機工程學系動力工程組(Marine Engineering, Division of Power Engineering)">輪機工程學系動力工程組</option>
-							<option value="海洋經營管理學士學位學程(Ocean Business Management)">海洋經營管理學士學位學程</option>
-							<option value="生命科學院(Life Sciences)">生命科學院</option>
-							<option value="食品科學系食品科學組(Food Science, Division of Food Science)">食品科學系食品科學組</option>
-							<option value="食品科學系生物科技組(Food Science, Division of Biotechnology)">食品科學系生物科技組</option>
-							<option value="水產養殖學系(Aquaculture)">水產養殖學系</option>
-							<option value="生命科學暨生物科技學系(Bioscience and Biotechnology)">生命科學暨生物科技學系</option>
-							<option value="海洋生物科技學士學位學程(Marine Biotechnology)">海洋生物科技學士學位學程</option>
-							<option value="海洋科學與資源學院(Ocean Science and Resource)">海洋科學與資源學院</option>
-							<option value="環境生物與漁業科學學系(Environmental Biology and Fisheries Science)">環境生物與漁業科學學系</option>
-							<option value="海洋環境資訊系(Marine Environmental Informatics)">海洋環境資訊系</option>
-							<option value="機械與機電工程學系(Mechanical and Mechatronic Engineering)">機械與機電工程學系</option>
-							<option value="系統工程暨造船學系(Systems Engineering and Naval Architecture)">系統工程暨造船學系</option>
-							<option value="河海工程學系(Harbor and River Engineering)">河海工程學系</option>
-							<option value="海洋工程科技學士學位學程(Ocean Engineering and Technology)">海洋工程科技學士學位學程</option>
-							<option value="電機工程學系(Electrical Engineering)">電機工程學系</option>
-							<option value="資訊工程學系(Computer Science and Engineering)">資訊工程學系</option>
-							<option value="通訊與導航工程學系(Communications, Navigation and Control Engineering)">通訊與導航工程學系</option>
-							<option value="光電與材料科技學系(Department of Optoelectronics and materials Technology)">光電與材料科技學系</option>
-							<option value="光電與材料科技學士學位學程(Bachelor Degree Program in Ocean Tourism Management Optoelectronics and Materials Technology )">光電與材料科技學士學位學程</option>
-							<option value="海洋文創設計產業學士學位學程(Oceanic Cultural Creative Design Industries)">海洋文創設計產業學士學位學程</option>
-							<option value="海洋觀光管理學士學位學程(Bachelor Degree Program in Ocean Tourism Management)">海洋觀光管理學士學位學程</option>
-							<option value="海洋法政學士學位學程(Bachelor Degree Program in Ocean Law and Policy)">海洋法政學士學位學程</option>
-							<option value="師資培育中心(Center of Teacher Education)">師資培育中心</option>
-							<option value="共同教育中心語文教育組(*)">共同教育中心語文教育組</option>
-							<option value="大學部英語課程(原外語中心)(*)">大學部英語課程(原外語中心)</option>
-							<option value="共同教育中心博雅教育組(*)">共同教育中心博雅教育組</option>
-							<option value="共同教育中心華語中心(*)">共同教育中心華語中心</option>
-							<option value="體育室(Office of Physical Education)">體育室</option>
-							<option value="軍訓室(Office of Military Education and Training)">軍訓室</option>
-							<option value="校際選課(*)">校際選課</option>
-							<option value="未來學院(*)">未來學院</option>
-							<option value="校際選課（臺北聯合大學系統）(*)">校際選課（臺北聯合大學系統）</option>
-							<option value="體育室(Office of Physical Education)">體育室</option>
-						</select>
-					</div>
-				</div>
-				<div class="gallery">
-					<div>
-						<p class = "word">授課教師</p>
-						<input id="professor" type="text">
-					</div>
-					<div>
-						<p class = "word">上課時段</p>
-						<select id = 'schedule' class='selectpicker' data-width='100%' title='Select Schedule' multiple>
-							<optgroup label='Monday'>
-								<option value = '100' title = '100'>00</option>
-								<option value = '101' title = '101'>01</option>
-								<option value = '102' title = '102'>02</option>
-								<option value = '103' title = '103'>03</option>
-								<option value = '104' title = '104'>04</option>
-								<option value = '105' title = '105'>05</option>
-								<option value = '106' title = '106'>06</option>
-								<option value = '107' title = '107'>07</option>
-								<option value = '108' title = '108'>08</option>
-								<option value = '109' title = '109'>09</option>
-								<option value = '110' title = '110'>10</option>
-								<option value = '111' title = '111'>11</option>
-								<option value = '112' title = '112'>12</option>
-								<option value = '113' title = '113'>13</option>
-								<option value = '114' title = '114'>14</option>
-								<option value = '115' title = '115'>15</option>
-								<option value = '116' title = '116'>16</option>
-							</optgroup>
-							<optgroup label='Tuesday'>
-								<option value = '200' title = '200'>00</option>
-								<option value = '201' title = '201'>01</option>
-								<option value = '202' title = '202'>02</option>
-								<option value = '203' title = '203'>03</option>
-								<option value = '204' title = '204'>04</option>
-								<option value = '205' title = '205'>05</option>
-								<option value = '206' title = '206'>06</option>
-								<option value = '207' title = '207'>07</option>
-								<option value = '208' title = '208'>08</option>
-								<option value = '209' title = '209'>09</option>
-								<option value = '210' title = '210'>10</option>
-								<option value = '211' title = '211'>11</option>
-								<option value = '212' title = '212'>12</option>
-								<option value = '213' title = '213'>13</option>
-								<option value = '214' title = '214'>14</option>
-								<option value = '215' title = '215'>15</option>
-								<option value = '216' title = '216'>16</option>
-							</optgroup>
-							<optgroup label='Wednesday'>
-								<option value = '300' title = '300'>00</option>
-								<option value = '301' title = '301'>01</option>
-								<option value = '302' title = '302'>02</option>
-								<option value = '303' title = '303'>03</option>
-								<option value = '304' title = '304'>04</option>
-								<option value = '305' title = '305'>05</option>
-								<option value = '306' title = '306'>06</option>
-								<option value = '307' title = '307'>07</option>
-								<option value = '308' title = '308'>08</option>
-								<option value = '309' title = '309'>09</option>
-								<option value = '310' title = '310'>10</option>
-								<option value = '311' title = '311'>11</option>
-								<option value = '312' title = '312'>12</option>
-								<option value = '313' title = '313'>13</option>
-								<option value = '314' title = '314'>14</option>
-								<option value = '315' title = '315'>15</option>
-								<option value = '316' title = '316'>16</option>
-							</optgroup>
-							<optgroup label='Thursday'>
-								<option value = '400' title = '400'>00</option>
-								<option value = '401' title = '401'>01</option>
-								<option value = '402' title = '402'>02</option>
-								<option value = '403' title = '403'>03</option>
-								<option value = '404' title = '404'>04</option>
-								<option value = '405' title = '405'>05</option>
-								<option value = '406' title = '406'>06</option>
-								<option value = '407' title = '407'>07</option>
-								<option value = '408' title = '408'>08</option>
-								<option value = '409' title = '409'>09</option>
-								<option value = '410' title = '410'>10</option>
-								<option value = '411' title = '411'>11</option>
-								<option value = '412' title = '412'>12</option>
-								<option value = '413' title = '413'>13</option>
-								<option value = '414' title = '414'>14</option>
-								<option value = '415' title = '415'>15</option>
-								<option value = '416' title = '416'>16</option>
-							</optgroup>
-							<optgroup label='Friday'>
-								<option value = '500' title = '500'>00</option>
-								<option value = '501' title = '501'>01</option>
-								<option value = '502' title = '502'>02</option>
-								<option value = '503' title = '503'>03</option>
-								<option value = '504' title = '504'>04</option>
-								<option value = '505' title = '505'>05</option>
-								<option value = '506' title = '506'>06</option>
-								<option value = '507' title = '507'>07</option>
-								<option value = '508' title = '508'>08</option>
-								<option value = '509' title = '509'>09</option>
-								<option value = '510' title = '510'>10</option>
-								<option value = '511' title = '511'>11</option>
-								<option value = '512' title = '512'>12</option>
-								<option value = '513' title = '513'>13</option>
-								<option value = '514' title = '514'>14</option>
-								<option value = '515' title = '515'>15</option>
-								<option value = '516' title = '516'>16</option>
-							</optgroup>
-							<optgroup label='Saturday'>
-								<option value = '600' title = '600'>00</option>
-								<option value = '601' title = '601'>01</option>
-								<option value = '602' title = '602'>02</option>
-								<option value = '603' title = '603'>03</option>
-								<option value = '604' title = '604'>04</option>
-								<option value = '605' title = '605'>05</option>
-								<option value = '606' title = '606'>06</option>
-								<option value = '607' title = '607'>07</option>
-								<option value = '608' title = '608'>08</option>
-								<option value = '609' title = '609'>09</option>
-								<option value = '610' title = '610'>10</option>
-								<option value = '611' title = '611'>11</option>
-								<option value = '612' title = '612'>12</option>
-								<option value = '613' title = '613'>13</option>
-								<option value = '614' title = '614'>14</option>
-								<option value = '615' title = '615'>15</option>
-								<option value = '616' title = '616'>16</option>
-							</optgroup>
-							<optgroup label='Sunday'>
-								<option value = '700' title = '700'>00</option>
-								<option value = '701' title = '701'>01</option>
-								<option value = '702' title = '702'>02</option>
-								<option value = '703' title = '703'>03</option>
-								<option value = '704' title = '704'>04</option>
-								<option value = '705' title = '705'>05</option>
-								<option value = '706' title = '706'>06</option>
-								<option value = '707' title = '707'>07</option>
-								<option value = '708' title = '708'>08</option>
-								<option value = '709' title = '709'>09</option>
-								<option value = '710' title = '710'>10</option>
-								<option value = '711' title = '711'>11</option>
-								<option value = '712' title = '712'>12</option>
-								<option value = '713' title = '713'>13</option>
-								<option value = '714' title = '714'>14</option>
-								<option value = '715' title = '715'>15</option>
-								<option value = '716' title = '716'>16</option>
-							</optgroup>
-						</select>
-					</div>
-				</div>
-				<div class="gallery">
-					<div>
-						<p class = "word">主領域</p>
-						<input id='main_field' type="text">
-					</div>
-					
-					<div>
-						<p class = "word">子領域</p>
-						<input id='sub_field' type="text">
-					</div>
-				</div>
-				<div class="gallery">	
-					<div>
-						<p class = "word">上課地點</p>
-						<input id='classroom' type="text">
-					</div>
-					
-					<div>
-						<p class = "word">開課年級</p>
-						<input type="text" id='grade'>
-					</div>
-				</div>
-				<div class="gallery">	
-					<div>
-						<p class = "word">備註</p>
-						<input id="description" type="text"/>
-					</div>
-					
-					<div>
-						<p class = "word">選課類別</p>
-						<input id='category' type="text">
-					</div>
-				</div>
-				
-				<ul align="center" class="actions">
-					<br><button id = 'click_search' class = 'button special'>搜尋</button>
-				</ul>
 			</div>
-		</section>
-
-		<!-- 小段黑色地帶 -->
-		<!-- Two -->
-		<div id = 'search_title'></div>
-
-		<!-- 清單 -->	
-		<div id ="search_results"></div>
-
-		<!-- Footer -->
-		<!-- <footer id="footer">
-			<div class="container">
-				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				</ul>
+		</article>
+		<article>
+			<img src="images/slide02.jpg" alt="" />
+			<div class="inner">
+				<header>
+					<p>你能夠透過下方的選項去選擇出你想查詢的課程</p>
+					<h2>新增</h2>
+				</header>
 			</div>
-			<div class="copyright">
-				&copy; Untitled. All rights reserved.
+		</article>
+		<article>
+			<img src="images/slide03.jpg" alt="" />
+			<div class="inner">
+				<header>
+					<p>你所蒐尋的課程將會呈現於網頁的下方</p>
+					<h2>清單</h2>
+				</header>
 			</div>
-		</footer> -->
-	</body>
+		</article>
+		<article>
+			<img src="images/slide04.jpg" alt="" />
+			<div class="inner">
+				<header>
+					<p>你能夠透過點選課程的詳細資訊去得到更多的課程資訊亦或是修改他</p>
+					<h2>詳細資訊</h2>
+				</header>
+			</div>
+		</article>
+		<article>
+			<img src="images/slide05.jpg" alt="" />
+			<div class="inner">
+				<header>
+					<p>你能夠在課程清單裡去新增你對這堂課程的留言亦或是察看他人對這堂課的留言</p>
+					<h2>留言功能</h2>
+				</header>
+			</div>
+		</article>
+	</section>
+
+	<!-- 搜尋選項 -->
+	<!-- 課程名稱(中英文)  開課系所  授課教師  上課時段  主領域  子領域  上課地點  開課年級  備註  選課類別  課號(單一查詢) -->
+	<!-- Three -->
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<header class="align-center">
+				<p class="special">
+					你能夠依據你所喜歡的選項去選擇<br>
+					找出你所想要找尋的課程
+				</p>
+				<h2>搜尋選項</h2>
+			</header>
+			<div class="align-center">
+				<div>
+					<div>
+						<p class="word">課號</p>
+						<input id="course_id" type="text" />
+					</div>
+				</div>
+			</div>
+			<div class="gallery">
+				<div>
+					<p class="word">課程名稱</p>
+					<input id="course_name" type="text" />
+				</div>
+				<div>
+					<p class="word">開課系所</p>
+					<select id='faculty_name'>
+						<option selected value=''>-- 請選擇學系 --</option>
+						<option value="商船學系(Merchant Marine)">商船學系</option>
+						<option value="航運管理學系(Shipping and Transportation Management)">航運管理學系</option>
+						<option value="運輸科學系(Transportation Science)">運輸科學系</option>
+						<option value="輪機工程學系能源應用組(Marine Engineering, Division of Energy Application)">輪機工程學系能源應用組</option>
+						<option value="輪機工程學系動力工程組(Marine Engineering, Division of Power Engineering)">輪機工程學系動力工程組</option>
+						<option value="海洋經營管理學士學位學程(Ocean Business Management)">海洋經營管理學士學位學程</option>
+						<option value="生命科學院(Life Sciences)">生命科學院</option>
+						<option value="食品科學系食品科學組(Food Science, Division of Food Science)">食品科學系食品科學組</option>
+						<option value="食品科學系生物科技組(Food Science, Division of Biotechnology)">食品科學系生物科技組</option>
+						<option value="水產養殖學系(Aquaculture)">水產養殖學系</option>
+						<option value="生命科學暨生物科技學系(Bioscience and Biotechnology)">生命科學暨生物科技學系</option>
+						<option value="海洋生物科技學士學位學程(Marine Biotechnology)">海洋生物科技學士學位學程</option>
+						<option value="海洋科學與資源學院(Ocean Science and Resource)">海洋科學與資源學院</option>
+						<option value="環境生物與漁業科學學系(Environmental Biology and Fisheries Science)">環境生物與漁業科學學系</option>
+						<option value="海洋環境資訊系(Marine Environmental Informatics)">海洋環境資訊系</option>
+						<option value="機械與機電工程學系(Mechanical and Mechatronic Engineering)">機械與機電工程學系</option>
+						<option value="系統工程暨造船學系(Systems Engineering and Naval Architecture)">系統工程暨造船學系</option>
+						<option value="河海工程學系(Harbor and River Engineering)">河海工程學系</option>
+						<option value="海洋工程科技學士學位學程(Ocean Engineering and Technology)">海洋工程科技學士學位學程</option>
+						<option value="電機工程學系(Electrical Engineering)">電機工程學系</option>
+						<option value="資訊工程學系(Computer Science and Engineering)">資訊工程學系</option>
+						<option value="通訊與導航工程學系(Communications, Navigation and Control Engineering)">通訊與導航工程學系</option>
+						<option value="光電與材料科技學系(Department of Optoelectronics and materials Technology)">光電與材料科技學系</option>
+						<option value="光電與材料科技學士學位學程(Bachelor Degree Program in Ocean Tourism Management Optoelectronics and Materials Technology )">光電與材料科技學士學位學程</option>
+						<option value="海洋文創設計產業學士學位學程(Oceanic Cultural Creative Design Industries)">海洋文創設計產業學士學位學程</option>
+						<option value="海洋觀光管理學士學位學程(Bachelor Degree Program in Ocean Tourism Management)">海洋觀光管理學士學位學程</option>
+						<option value="海洋法政學士學位學程(Bachelor Degree Program in Ocean Law and Policy)">海洋法政學士學位學程</option>
+						<option value="師資培育中心(Center of Teacher Education)">師資培育中心</option>
+						<option value="共同教育中心語文教育組(*)">共同教育中心語文教育組</option>
+						<option value="大學部英語課程(原外語中心)(*)">大學部英語課程(原外語中心)</option>
+						<option value="共同教育中心博雅教育組(*)">共同教育中心博雅教育組</option>
+						<option value="共同教育中心華語中心(*)">共同教育中心華語中心</option>
+						<option value="體育室(Office of Physical Education)">體育室</option>
+						<option value="軍訓室(Office of Military Education and Training)">軍訓室</option>
+						<option value="校際選課(*)">校際選課</option>
+						<option value="未來學院(*)">未來學院</option>
+						<option value="校際選課（臺北聯合大學系統）(*)">校際選課（臺北聯合大學系統）</option>
+						<option value="體育室(Office of Physical Education)">體育室</option>
+					</select>
+				</div>
+			</div>
+			<div class="gallery">
+				<div>
+					<p class="word">授課教師</p>
+					<input id="professor" type="text">
+				</div>
+				<div>
+					<p class="word">上課時段</p>
+					<select id='schedule' class='selectpicker' data-width='100%' title='Select Schedule' multiple></select>
+				</div>
+			</div>
+			<div class="gallery">
+				<div>
+					<p class="word">主領域</p>
+					<input id='main_field' type="text">
+				</div>
+
+				<div>
+					<p class="word">子領域</p>
+					<input id='sub_field' type="text">
+				</div>
+			</div>
+			<div class="gallery">
+				<div>
+					<p class="word">上課地點</p>
+					<input id='classroom' type="text">
+				</div>
+
+				<div>
+					<p class="word">開課年級</p>
+					<input type="text" id='grade'>
+				</div>
+			</div>
+			<div class="gallery">
+				<div>
+					<p class="word">備註</p>
+					<input id="description" type="text" />
+				</div>
+
+				<div>
+					<p class="word">選課類別</p>
+					<input id='category' type="text">
+				</div>
+			</div>
+
+			<ul align="center" class="actions">
+				<br><button id='click_search' class='button special'>搜尋</button>
+			</ul>
+		</div>
+	</section>
+
+	<!-- 小段黑色地帶 -->
+	<!-- Two -->
+	<div id='search_title'></div>
+
+	<!-- 清單 -->
+	<div id="search_results"></div>
+</body>
+
 </html>
