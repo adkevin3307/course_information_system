@@ -1,79 +1,100 @@
 var query = [
-    'course_id',
-    'course_name',
-    'faculty_name',
+    'id',
+    'name',
+    'facultyName',
     'professor',
     'schedule',
-    'main_field',
-    'sub_field',
+    'mainField',
+    'subField',
     'classroom',
     'grade',
     'category',
     'description'
 ];
 
-function append_url(query, value) {
-    return (value ? (query + '=' + value + '&') : '');
+function set_data(query, value) {
+    var result = '';
+
+    if (value) {
+        if (query == 'schedule' || query == 'classroom') {
+            result += query + ':' + '["' + value.join('","') + '"]' + ',';
+        }
+        else {
+            result += query + ':' + '"' + value + '"' + ',';
+        }
+    }
+
+    return result;
 }
 
 function search() {
-    var courses_info;
-    var url_str = 'https://cis.ntouo.tw/api/courses?';
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
+    var query_str = '';
     for (i = 0; i < query.length; i++) {
-        url_str += append_url(query[i], $('#' + query[i]).val());
+        query_str += set_data(query[i], $('#' + query[i]).val());
     }
 
-    $.ajax({
-        url: url_str,
-        type: "GET",
-        async: false,
-        success: function(response) {
-            courses_info = response;
-        }
+    var graphql_body = JSON.stringify({
+        query: "{courses(filter: {" + query_str + "}){information{id mainField grade name{chinese}}}}",
+        variables: {}
     });
 
-    $('#search_title').empty();
-    $('#search_title').append(
-        '<section id="two" class="wrapper style3">' +
-            '<div class="inner">' +
-                '<header class="align-center">' +
-                    '<h2>搜尋結果</h2>' +
-                '</header>' +
-            '</div>' +
-        '</section>'
-    );
-
-    $('#search_results').empty();
-    if (courses_info.length != 0) {
-        $('#search_results').append(
-            "<section id='one' class='wrapper style2'>" +
-                    "<div class='inner'>" +
-                        "<div id = 'outputclass' class='grid-style'>" +
+    fetch('http://localhost:8080/graphql', {
+        method: 'post',
+        headers: headers,
+        body: graphql_body,
+        redirect: "follow"
+    }).then(
+        response => response.text()
+    ).then(
+        result => JSON.parse(result)['data']['courses']
+    ).then(function(courses_info) {
+        $('#search_title').empty();
+        $('#search_title').append(
+            '<section id="two" class="wrapper style3">' +
+                '<div class="inner">' +
+                    '<header class="align-center">' +
+                        '<h2>搜尋結果</h2>' +
+                    '</header>' +
+                '</div>' +
+            '</section>'
+        );
+    
+        $('#search_results').empty();
+        if (courses_info.length != 0) {
+            $('#search_results').append(
+                "<section id='one' class='wrapper style2'>" +
+                        "<div class='inner'>" +
+                            "<div id = 'outputclass' class='grid-style'>" +
+                            "</div>" +
+                        "</div>" +
+                "</section>"
+            );
+        }
+    
+        $('#outputclass').empty();
+        for(j = 0; j < courses_info.length; j++) {
+            $('#outputclass').append(
+                "<div>" +
+                    "<div class='box'>" +
+                        "<div class='content'>" +
+                            "<header class='align-center'>" +
+                                "<p>" + courses_info[j]["information"]["mainField"] + "</p>" +
+                                "<h2>" + courses_info[j]["information"]["name"]["chinese"] + "</h2>" +
+                            "</header>" +
+                            "<footer class='align-center'>" +
+                                "<a href='course.html?id=" + courses_info[j]["information"]["id"] + "&grade=" + courses_info[j]["information"]["grade"] + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
+                            "</footer>" +
                         "</div>" +
                     "</div>" +
-            "</section>"
-        );
-    }
-
-    $('#outputclass').empty();
-    for(j = 0; j < courses_info.length; j++) {
-        $('#outputclass').append(
-            "<div>" +
-                "<div class='box'>" +
-                    "<div class='content'>" +
-                        "<header class='align-center'>" +
-                            "<p>" + courses_info[j].main_field + "</p>" +
-                            "<h2>" + courses_info[j].chi_course_name + "</h2>" +
-                        "</header>" +
-                        "<footer class='align-center'>" +
-                            "<a href='course.html?course_id=" + courses_info[j].course_id + "&grade=" + courses_info[j].grade + "' class='button alt' id = 'accordionExample'>詳細資訊</a>" +
-                        "</footer>" +
-                    "</div>" +
-                "</div>" +
-            "</div>"
-        );
-    }
+                "</div>"
+            );
+        }
+    }).catch(
+        error => console.log(error)
+    )
 }
 
 function search_course() {

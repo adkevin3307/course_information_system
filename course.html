@@ -5,223 +5,201 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-	<head>
-		<title>Hielo by TEMPLATED</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
 
-	</head>
-	<body class="subpage">
+<head>
+	<title>Hielo by TEMPLATED</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="assets/css/main.css" />
 
-		<!-- Header -->
-			<header id="header">
-				<div class="logo"><a href="index.html">CIS <span>by ntouo</span></a></div>
-				<a href="#menu">Menu</a>
+</head>
+
+<body class="subpage">
+
+	<!-- Header -->
+	<header id="header">
+		<div class="logo"><a href="index.html">CIS <span>by ntouo</span></a></div>
+		<a href="#menu">Menu</a>
+	</header>
+
+	<!-- Nav -->
+	<nav id="menu">
+		<ul class="links">
+			<li><a href="index.html">首頁</a></li>
+			<li><a href="new.html">新增課程</a></li>
+		</ul>
+	</nav>
+
+	<!-- One -->
+	<section id="One" class="wrapper style3">
+		<div class="inner">
+			<!-- course_name -->
+			<header class="align-center">
+				<!-- -->
+				<p id="course_name_en"></p>
+				<h2 id="course_name_ch"></h2>
 			</header>
+		</div>
+	</section>
 
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="index.html">首頁</a></li>
-					<li><a href="new.html">新增課程</a></li>
-				</ul>
-			</nav>
+	<!-- Two -->
+	<section id="two" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<div class="align-center">
+						<header>
+							<h2>課程基本資訊</h2>
+							<input type="button" id="change" value="修改"
+								style="float:right; margin-bottom: 1%; margin-left: 0.5%;">
+							<input type="button" id="delete" value="刪除" style="float:right">
+						</header>
+					</div>
 
-		<!-- One -->
-			<section id="One" class="wrapper style3">
-				<div class="inner">
-					<!-- course_name -->
+					<p>
+					<table id="basic_info" style="word-wrap:break-word;table-layout:fixed;">
+						<tr>
+							<td class="item_name" style="width: 25%;font-weight:bold;color:black">課號</td>
+							<td id="course_id" style="width: 25%;"></td>
+							<td class="item_name" style="width: 25%;font-weight:bold;color:black">開課系所</td>
+							<td id="faculty_name" style="width: 25%;"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">授課教師</td>
+							<td id="professor"></td>
+							<td class="item_name" style="font-weight:bold;color:black">開課年班</td>
+							<td id="grade"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">學分</td>
+							<td id="credit"></td>
+							<td class="item_name" style="font-weight:bold;color:black">時數</td>
+							<td id="hour"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">人數上限</td>
+							<td id="max_students">5</td>
+							<td class="item_name" style="font-weight:bold;color:black">人數下限</td>
+							<td id="min_students"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">選課人數</td>
+							<td id="students"></td>
+							<td class="item_name" style="font-weight:bold;color:black">是否實習</td>
+							<td id="internship"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">選課類別</td>
+							<td id="category"></td>
+							<td class="item_name" style="font-weight:bold;color:black">開課期限</td>
+							<td id="duration"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">上課時間</td>
+							<td id="class_schedule"></td>
+							<td class="item_name" style="font-weight:bold;color:black">上課地點</td>
+							<td id="classroom"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">主領域</td>
+							<td id="main_field"></td>
+							<td class="item_name" style="font-weight:bold;color:black">子領域</td>
+							<td id="sub_field"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">備註</td>
+							<td id="description"></td>
+							<td class="item_name" style="font-weight:bold;color:black">合授教師</td>
+							<td id="co_professors"></td>
+						</tr>
+					</table>
+					</p>
+
 					<header class="align-center">
-						<!-- -->
-						<p id="course_name_en"></p>
-						<h2 id="course_name_ch"></h2>
+						<h2>課程綱要</h2>
 					</header>
+					<p>
+					<table>
+						<tr>
+							<td style="width:50%;font-weight:bold;color:black">中文</td>
+							<td style="width:50%;font-weight:bold;color:black">English</td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">教學目標</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td id="chi_objective"></td>
+							<td id="eng_objective"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">先修科目</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td id="chi_pre_course"></td>
+							<td id="eng_pre_course"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">教材內容</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td id="chi_outline"></td>
+							<td id="eng_outline"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">教學方式</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td id="chi_teaching_method"></td>
+							<td id="eng_teaching_method"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">參考書目</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td id="chi_reference"></td>
+							<td id="eng_reference"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">教學進度</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td id="chi_syllabus"></td>
+							<td id="eng_syllabus"></td>
+						</tr>
+						<tr>
+							<td class="item_name" style="font-weight:bold;color:black">評量方式</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td id="chi_evaluation"></td>
+							<td id="eng_evaluation"></td>
+						</tr>
+					</table>
+					</p>
 				</div>
-			</section>
+			</div>
+		</div>
+	</section>
+	<section id='three' class='wrapper style2'>
+		<div class='inner'>
+			<div id='outputclass' class='grid-style'>
+			</div>
+		</div>
+	</section>
 
-		<!-- Two -->
-			<section id="two" class="wrapper style2">
-				<div class="inner">
-					<div class="box">
-						<div class="content">
-							<div class="align-center">
-								<header>
-									<h2>課程基本資訊</h2>
-									<input type="button" id="change" value="修改" style="float:right; margin-bottom: 1%; margin-left: 0.5%;">
-									<input type="button" id="delete" value="刪除" style="float:right">
-								</header>
-							</div>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/course.js"></script>
+</body>
 
-							<p>
-								<table id="basic_info" style="word-wrap:break-word;table-layout:fixed;">
-									<tr>
-										<td class="item_name" style="width: 25%;font-weight:bold;color:black">課號</td>
-										<td id="course_id" style="width: 25%;"></td>
-										<td class="item_name" style="width: 25%;font-weight:bold;color:black">開課系所</td>
-										<td id="faculty_name" style="width: 25%;"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">授課教師</td>
-										<td id="professor"></td>
-										<td class="item_name" style="font-weight:bold;color:black">開課年班</td>
-										<td id="grade"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">學分</td>
-										<td id="credit"></td>
-										<td class="item_name" style="font-weight:bold;color:black">時數</td>
-										<td id="hour"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">人數上限</td>
-										<td id="max_students">5</td>
-										<td class="item_name" style="font-weight:bold;color:black">人數下限</td>
-										<td id="min_students"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">選課人數</td>
-										<td id="students"></td>
-										<td class="item_name" style="font-weight:bold;color:black">是否實習</td>
-										<td id="internship"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">選課類別</td>
-										<td id="category"></td>
-										<td class="item_name" style="font-weight:bold;color:black">開課期限</td>
-										<td id="duration"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">上課時間</td>
-										<td id="class_schedule"></td>
-										<td class="item_name" style="font-weight:bold;color:black">上課地點</td>
-										<td id="classroom"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">主領域</td>
-										<td id="main_field"></td>
-										<td class="item_name" style="font-weight:bold;color:black">子領域</td>
-										<td id="sub_field"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">備註</td>
-										<td id="description"></td>
-										<td class="item_name" style="font-weight:bold;color:black">合授教師</td>
-										<td id="co_professors"></td>
-									</tr>
-								</table>
-							</p>
-
-							<header class="align-center">
-								<h2>課程綱要</h2>
-							</header>
-							<p>
-								<table>
-									<tr>
-										<td style="width:50%;font-weight:bold;color:black">中文</td>
-										<td style="width:50%;font-weight:bold;color:black">English</td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">教學目標</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td id="chi_objective"></td>
-										<td id="eng_objective"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">先修科目</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td id="chi_pre_course"></td>
-										<td id="eng_pre_course"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">教材內容</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td id="chi_outline"></td>
-										<td id="eng_outline"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">教學方式</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td id="chi_teaching_method"></td>
-										<td id="eng_teaching_method"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">參考書目</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td id="chi_reference"></td>
-										<td id="eng_reference"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">教學進度</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td id="chi_syllabus"></td>
-										<td id="eng_syllabus"></td>
-									</tr>
-									<tr>
-										<td class="item_name" style="font-weight:bold;color:black">評量方式</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td id="chi_evaluation"></td>
-										<td id="eng_evaluation"></td>
-									</tr>
-								</table>
-
-								<!--留言版-->
-								<header class="align-center">
-									<h2>留言板</h2>
-								</header>
-								<table id="messages_table">
-								</table>
-								<div style="margin-bottom: 10%">
-									<input type="text" id="message_input" style="width:85%;float:left">
-									<input type="button" id="send_message" value="我要留言" style="float:right;">
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section id='three' class='wrapper style2'>
-				<div class='inner'>
-					<div id = 'outputclass' class='grid-style'>
-					</div>
-				</div>
-			</section>
-
-		<!-- Footer -->
-			<!-- <footer id="footer">
-				<div class="container">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-					</ul>
-				</div>
-				<div class="copyright">
-					&copy; Untitled. All rights reserved.
-				</div>
-			</footer> -->
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src="assets/js/course.js"></script>
-	</body>
 </html>
