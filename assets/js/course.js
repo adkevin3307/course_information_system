@@ -80,7 +80,7 @@ $(document).ready(function () {
         setData("#course_name_ch", course['information']['name']['chinese']);
         // basic_info
         setData("#course_id", course['information']['id']);
-        setData("#faculty_name", course['information']['facultName']);
+        setData("#faculty_name", course['information']['facultyName']);
         setData("#professor", course['information']['professor']);
         setData("#grade", course['information']['grade']);
         setData("#credit", course['information']['credit']);
@@ -125,43 +125,55 @@ $(document).ready(function () {
         setData("#co_professors", co_professors_content);
         // syllabus
         setData("#chi_objective", course['guideline']['objective']['chinese']);
-        setData("#eng_objective", course['guideline']['objective']['englise']);
+        setData("#eng_objective", course['guideline']['objective']['english']);
         setData("#chi_pre_course", course['guideline']['preCourse']['chinese']);
-        setData("#eng_pre_course", course['guideline']['preCourse']['englise']);
+        setData("#eng_pre_course", course['guideline']['preCourse']['english']);
         setData("#chi_outline", course['guideline']['outline']['chinese']);
-        setData("#eng_outline", course['guideline']['outline']['englise']);
+        setData("#eng_outline", course['guideline']['outline']['english']);
         setData("#chi_teaching_method", course['guideline']['teachingMethod']['chinese']);
-        setData("#eng_teaching_method", course['guideline']['teachingMethod']['englise']);
+        setData("#eng_teaching_method", course['guideline']['teachingMethod']['english']);
         setData("#chi_reference", course['guideline']['reference']['chinese']);
-        setData("#eng_reference", course['guideline']['reference']['englise']);
+        setData("#eng_reference", course['guideline']['reference']['english']);
         setData("#chi_syllabus", course['guideline']['syllabus']['chinese']);
-        setData("#eng_syllabus", course['guideline']['syllabus']['englise']);
+        setData("#eng_syllabus", course['guideline']['syllabus']['english']);
         setData("#chi_evaluation", course['guideline']['evaluation']['chinese']);
-        setData("#eng_evaluation", course['guideline']['evaluation']['englise']);
+        setData("#eng_evaluation", course['guideline']['evaluation']['english']);
     }).catch(
         error => console.log(error)
     )
 });
 
 // button link to change this course page
-// $("#change").click(function () {
-//     $(location).attr("href", "new.html?course_id=" + course_id + "&grade=" + grade);
-// });
+$("#change").click(function () {
+    var search_str = location.search.substr(1);
+    var search_array = search_str.split('&');
+    var search_array0 = search_array[0].split('=');
+    var search_array1 = search_array[1].split('=');
+    var id = search_array0[1];
+    var grade = search_array1[1];
+
+    location.href = 'new.html?id=' + id + '&grade=' + grade;
+});
 
 // function for delete this course
-// $("#delete").click(function () {
-//     if (window.confirm("真的要刪除本課程ㄇ?")) {
-//         $.ajax({
-//             url: "https://cis.ntouo.tw/api/course/" + course_id + "/" + grade,
-//             type: "DELETE",
-//             async: false,
-//             success: function () {
-//                 window.alert("課程刪除成功");
-//                 location.href = 'index.html';
-//             }
-//         })
-//     }
-//     else {
-//         return;
-//     }
-// });
+$("#delete").click(function () {
+    var search_str = location.search.substr(1);
+    var search_array = search_str.split('&');
+    var search_array0 = search_array[0].split('=');
+    var search_array1 = search_array[1].split('=');
+    var id = search_array0[1];
+    var grade = search_array1[1];
+
+    if (window.confirm("真的要刪除本課程ㄇ？")) {
+        fetch('http://localhost:8080/api', {
+            method: 'delete',
+            body: JSON.stringify({
+                "id": id,
+                "grade": grade
+            })
+        }).then(function() {
+            window.alert("課程刪除成功");
+            location.href = 'index.html';
+        })
+    }
+});

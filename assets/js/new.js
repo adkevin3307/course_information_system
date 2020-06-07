@@ -6,53 +6,67 @@ FUNCTION:
 */
 
 var input = {
-    "course_id": "",
-    "grade": "",
-    "professor": "",
-    "year_semester": "",
-    "faculty_name": "",
-    "chi_course_name": "",
-    "eng_course_name": "",
-    "credit": 0,
-    "hour": 0,
-    "max_students": 0,
-    "min_students": 0,
-    "category": "",
-    "duration": "",
-    "internship": false,
-    "main_field": "",
-    "sub_field": "",
-    "students": 0,
-    "description": "",
-    "core_ability": "",
-    "chi_objective": "",
-    "eng_objective": "",
-    "chi_pre_course": "",
-    "eng_pre_course": "",
-    "chi_outline": "",
-    "eng_outline": "",
-    "chi_teaching_method": "",
-    "eng_teaching_method": "",
-    "chi_reference": "",
-    "eng_reference": "",
-    "chi_syllabus": "",
-    "eng_syllabus": "",
-    "chi_evaluation": "",
-    "eng_evaluation": "",
-    "reference_link": "",
-    "schedule": [],
-    "classroom": [],
-    "co_professors": []
+    "information": {
+        "id": "",
+        "grade": "",
+        "professor": "",
+        "yearSemester": "",
+        "facultyName": "",
+        "name": {
+            "english": "",
+            "chinese": ""
+        },
+        "credit": 0,
+        "hour": 0,
+        "maxStudents": 0,
+        "minStudents": 0,
+        "category": "",
+        "duration": "",
+        "internship": false,
+        "mainField": "",
+        "subField": "",
+        "students": 0,
+        "description": "",
+        "schedule": [],
+        "classroom": [],
+        "coProfessors": []
+    },
+    "guideline": {
+        "objective": {
+            "english": "",
+            "chinese": ""
+        },
+        "preCourse": {
+            "english": "",
+            "chinese": ""
+        },
+        "outline": {
+            "english": "",
+            "chinese": ""
+        },
+        "teachingMethod": {
+            "english": "",
+            "chinese": ""
+        },
+        "reference": {
+            "english": "",
+            "chinese": ""
+        },
+        "syllabus": {
+            "english": "",
+            "chinese": ""
+        },
+        "evaluation": {
+            "english": "",
+            "chinese": ""
+        },
+        "referenceLink": ""
+    }
 }
 
 // check if there is data and set data in web
 function setData(id, value) {
-    if (value == null) {
-        $(id).text("");
-    }
-    else {
-        $(id).text(value);
-    }
+    $(id).text((value == null ? '' : value));
 }
 
 // string to array
@@ -74,62 +88,106 @@ $(document).ready(function () {
         var search_array = search_str.split('&');
         var search_array0 = search_array[0].split('=');
         var search_array1 = search_array[1].split('=');
-        var course_id = search_array0[1];
+        var id = search_array0[1];
         var grade = search_array1[1];
 
-        // get course all information by primary key(course_id, grade) and put in course_info
-        $.ajax({
-            url: "https://cis.ntouo.tw/api/courses?course_id=" + course_id + "&grade=" + grade,
-            type: "get",
-            async: false,
-            success: function (response) {
-                course_infos = response;
-            }
-        });
-        var course_info = course_infos[0]; // turn array of course into a course
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
 
-        $("#year_semester").val(course_info.year_semester);
-        $("#course_id").val(course_info.course_id);
-        $("#chi_course_name").val(course_info.chi_course_name);
-        $("#eng_course_name").val(course_info.eng_course_name);
-        $("#professor").val(course_info.professor);
-        $("#grade").val(course_info.grade);
-        $("#credit").val(course_info.credit);
-        $("#hour").val(course_info.hour);
-        $("#max_students").val(course_info.max_students);
-        $("#min_students").val(course_info.min_students);
-        $("#faculty_name").val(course_info.faculty_name);
-        if (course_info.internship) {
-            $("#internship").val("true");
-        }
-        else {
-            $("#intership").val("false");
-        }
+        var graphql_body = JSON.stringify({
+            query:
+                '{' +
+                    'course(id:"' + id + '",grade:"' + grade + '") {' +
+                        'information {' +
+                            'id ' +
+                            'yearSemester ' +
+                            'facultyName ' +
+                            'professor ' +
+                            'name {chinese english} ' +
+                            'grade ' +
+                            'credit ' +
+                            'hour ' +
+                            'maxStudents ' +
+                            'minStudents ' +
+                            'students ' +
+                            'category ' +
+                            'duration ' +
+                            'internship ' +
+                            'schedule ' +
+                            'classroom ' +
+                            'mainField ' +
+                            'subField ' +
+                            'description ' +
+                            'coProfessors' +
+                        '}' +
+                        'guideline {' +
+                            'objective {chinese english} ' +
+                            'preCourse {chinese english} ' +
+                            'outline {chinese english} ' +
+                            'teachingMethod {chinese english} ' +
+                            'reference {chinese english} ' +
+                            'syllabus {chinese english} ' +
+                            'evaluation {chinese english} ' +
+                            'referenceLink' +
+                        '}' +
+                    '}' +
+                '}',
+            variables: {}
+        })
 
-        $("#category").val(course_info.category);
-        $("#duration").val(course_info.duration);
-        $("#schedule").val(course_info.schedule);
-        $("#classroom").val(course_info.classroom);
-        $("#main_field").val(course_info.main_field);
-        $("#sub_field").val(course_info.sub_field);
-        $("#description").val(course_info.description);
-        $("#co_professors").val(course_info.co_professors);
+        fetch('http://localhost:8080/graphql', {
+            method: 'post',
+            headers: headers,
+            body: graphql_body,
+            redirect: "follow"
+        }).then(
+            response => response.text()
+        ).then(
+            result => JSON.parse(result)['data']['course']
+        ).then(function(course) {
+            // information
+            $("#course_id").val(course['information']['id'])
+            $("#year_semester").val(course['information']['yearSemester'])
+            $("#chi_course_name").val(course['information']['name']['chinese'])
+            $("#eng_course_name").val(course['information']['name']['english'])
+            $("#professor").val(course['information']['professor'])
+            $("#grade").val(course['information']['grade'])
+            $("#credit").val(course['information']['credit'])
+            $("#hour").val(course['information']['hour'])
+            $("#max_students").val(course['information']['maxStudents'])
+            $("#min_students").val(course['information']['minStudents'])
+            $("#faculty_name").val(course['information']['facultyName'])
+            $("#internship").attr('value', course['information']['internship'])
+            $("#category").val(course['information']['category'])
+            $("#duration").val(course['information']['duration'])
+            $("#schedule").val(course['information']['schedule'])
+            $("#classroom").val(course['information']['classroom'])
+            $("#main_field").val(course['information']['mainField'])
+            $("#sub_field").val(course['information']['subField'])
+            $("#description").val(course['information']['description'])
+            $("#co_professors").val(course['information']['coProfessors'])
+            // guideline
+            setData("#chi_objective", course['guideline']['objective']['chinese']);
+            setData("#eng_objective", course['guideline']['objective']['english']);
+            setData("#chi_pre_course", course['guideline']['preCourse']['chinese']);
+            setData("#eng_pre_course", course['guideline']['preCourse']['english']);
+            setData("#chi_outline", course['guideline']['outline']['chinese']);
+            setData("#eng_outline", course['guideline']['outline']['english']);
+            setData("#chi_teaching_method", course['guideline']['teachingMethod']['chinese']);
+            setData("#eng_teaching_method", course['guideline']['teachingMethod']['english']);
+            setData("#chi_reference", course['guideline']['reference']['chinese']);
+            setData("#eng_reference", course['guideline']['reference']['english']);
+            setData("#chi_syllabus", course['guideline']['syllabus']['chinese']);
+            setData("#eng_syllabus", course['guideline']['syllabus']['english']);
+            setData("#chi_evaluation", course['guideline']['evaluation']['chinese']);
+            setData("#eng_evaluation", course['guideline']['evaluation']['english']);
 
-        // syllabus
-        setData("#chi_objective", course_info.chi_objective);
-        setData("#eng_objective", course_info.eng_objective);
-        setData("#chi_pre_course", course_info.chi_pre_course);
-        setData("#eng_pre_course", course_info.eng_pre_course);
-        setData("#chi_outline", course_info.chi_outline);
-        setData("#eng_outline", course_info.eng_outline);
-        setData("#chi_teaching_method", course_info.chi_teaching_method);
-        setData("#eng_teaching_method", course_info.eng_teaching_method);
-        setData("#chi_reference", course_info.chi_reference);
-        setData("#eng_reference", course_info.eng_reference);
-        setData("#chi_syllabus", course_info.chi_syllabus);
-        setData("#eng_syllabus", course_info.eng_syllabus);
-        setData("#chi_evaluation", course_info.chi_evaluation);
-        setData("#eng_evaluation", course_info.eng_evaluation);
+            $('#cancel_modify').click(function () {
+                location.href = 'course.html?id=' + id + '&grade=' + grade;
+            })
+        }).catch(
+            error => console.log(error)
+        )
     }
     else { // new a course
         // change title ,document and button
@@ -137,58 +195,57 @@ $(document).ready(function () {
         $("#title").text("新增");
         $("#document").text("將每個項目的資料填入，完成後點擊送出。");
         $("#getData").text("新增");
-    }
 
-    $('#cancel_modify').click(function () {
-        location.href = 'generic.html?course_id=' + course_info.course_id + '&grade=' + course_info.grade;
-    })
+        $('#cancel_modify').click(function () {
+            location.href = 'index.html';
+        })
+    }
 });
 
 // get user input -> check -> show
 function click_sends() {
-    console.log("run click_sends");
     // get input and put int var data
-    input.year_semester = parseInt($("#year_semester").val());
-    input.course_id = $("#course_id").val();
-    input.chi_course_name = $("#chi_course_name").val();
-    input.eng_course_name = $("#eng_course_name").val();
-    input.professor = $("#professor").val();
-    input.grade = $("#grade").val();
-    input.credit = parseInt($("#credit").val());
-    input.hour = parseInt($("#hour").val());
-    input.max_students = parseInt($("#max_students").val());
-    input.min_students = parseInt($("#min_students").val());
-    input.faculty_name = $("#faculty_name").val();
-    input.internship = ($("#internship").val() === "true");
-    input.category = $("#category").val();
-    input.duration = $("#duration").val();
+    input['information']['yearSemester'] = parseInt($("#year_semester").val());
+    input['information']['id'] = $("#course_id").val();
+    input['information']['name']['chinese'] = $("#chi_course_name").val();
+    input['information']['name']['english'] = $("#eng_course_name").val();
+    input['information']['professor'] = $("#professor").val();
+    input['information']['grade'] = $("#grade").val();
+    input['information']['credit'] = parseInt($("#credit").val());
+    input['information']['hour'] = parseInt($("#hour").val());
+    input['information']['maxStudents'] = parseInt($("#max_students").val());
+    input['information']['minStudents'] = parseInt($("#min_students").val());
+    input['information']['facultyName'] = $("#faculty_name").val();
+    input['information']['internship'] = ($("#internship").val());
+    input['information']['category'] = $("#category").val();
+    input['information']['duration'] = $("#duration").val();
     if ($("#schedule").val() == null) {
         window.alert("請確認輸入!!");
         return;
     }
     else {
-        input.schedule = $("#schedule").val().map(Number);
+        input['schedule'] = $("#schedule").val().map(Number);
     }
-    input.classroom = string2array($("#classroom").val());
-    input.main_field = $("#main_field").val();
-    input.sub_field = $("#sub_field").val();
-    input.description = $("#description").val();
-    input.co_professors = string2array($("#co_professors").val());
+    input['information']['classroom'] = string2array($("#classroom").val());
+    input['information']['mainField'] = $("#main_field").val();
+    input['information']['subField'] = $("#sub_field").val();
+    input['information']['description'] = $("#description").val();
+    input['information']['coProfessors'] = string2array($("#co_professors").val());
 
-    input.chi_objective = $("#chi_objective").val();
-    input.eng_objective = $("#eng_objective").val();
-    input.chi_pre_course = $("#chi_pre_course").val();
-    input.eng_pre_course = $("#eng_pre_course").val();
-    input.chi_outline = $("#chi_outline").val();
-    input.eng_outline = $("#eng_outline").val();
-    input.chi_teaching_method = $("#chi_teaching_method").val();
-    input.eng_teaching_method = $("#eng_teaching_method").val();
-    input.chi_reference = $("#chi_reference").val();
-    input.eng_reference = $("#eng_reference").val();
-    input.chi_syllabus = $("#chi_syllabus").val();
-    input.eng_syllabus = $("#eng_syllabus").val();
-    input.chi_evaluation = $("#chi_evaluation").val();
-    input.eng_evaluation = $("#eng_evaluation").val();
+    input['guideline']['objective']['chinese'] = $("#chi_objective").val();
+    input['guideline']['objective']['english'] = $("#eng_objective").val();
+    input['guideline']['preCourse']['chinese'] = $("#chi_pre_course").val();
+    input['guideline']['preCourse']['english'] = $("#eng_pre_course").val();
+    input['guideline']['outline']['chinese'] = $("#chi_outline").val();
+    input['guideline']['outline']['english'] = $("#eng_outline").val();
+    input['guideline']['teachingMethod']['chinese'] = $("#chi_teaching_method").val();
+    input['guideline']['teachingMethod']['english'] = $("#eng_teaching_method").val();
+    input['guideline']['reference']['chinese'] = $("#chi_reference").val();
+    input['guideline']['reference']['english'] = $("#eng_reference").val();
+    input['guideline']['syllabus']['chinese'] = $("#chi_syllabus").val();
+    input['guideline']['syllabus']['english'] = $("#eng_syllabus").val();
+    input['guideline']['evaluation']['chinese'] = $("#chi_evaluation").val();
+    input['guideline']['evaluation']['english'] = $("#eng_evaluation").val();
     if (checkData() == true) {
         $('#trigger_modal').trigger('click');
     }
@@ -197,57 +254,50 @@ function click_sends() {
         return;
     }
     // output for user check
-    setData("#out_year_semester", input.year_semester);
-    setData("#out_eng_course_name", input.eng_course_name);
-    setData("#out_chi_course_name", input.chi_course_name);
-    setData("#out_course_id", input.course_id);
-    setData("#out_faculty_name", input.faculty_name);
-    setData("#out_professor", input.professor);
-    setData("#out_grade", input.grade);
-    setData("#out_credit", input.credit);
-    setData("#out_hour", input.hour);
-    setData("#out_max_students", input.max_students);
-    setData("#out_min_students", input.min_students);
-    setData("#out_students", input.students + "人 (此人數為最近一次查詢時人數)");
-    if (input.internship) {
-        $("#out_internship").text("是");
-    }
-    else {
-        $("#out_internship").text("否");
-    }
-    setData("#out_category", input.category);
-    setData("#out_duration", input.duration);
-    setData("#out_class_schedule", input.schedule);
-    setData("#out_classroom", input.classroom);
-
-    setData("#out_main_field", input.main_field);
-    setData("#out_sub_field", input.sub_field);
-    setData("#out_description", input.description);
+    setData("#out_year_semester", input['information']['yearSemester']);
+    setData("#out_eng_course_name", input['information']['name']['english']);
+    setData("#out_chi_course_name", input['information']['name']['chinese']);
+    setData("#out_course_id", input['information']['id']);
+    setData("#out_faculty_name", input['information']['facultyName']);
+    setData("#out_professor", input['information']['professor']);
+    setData("#out_grade", input['information']['grade']);
+    setData("#out_credit", input['information']['credit']);
+    setData("#out_hour", input['information']['hour']);
+    setData("#out_max_students", input['information']['maxStudents']);
+    setData("#out_min_students", input['information']['minStudents']);
+    setData("#out_students", input['information']['students'] + "人 (此人數為最近一次查詢時人數)");
+    setData("#out_internship", input['information']['internship'])
+    setData("#out_category", input['information']['category']);
+    setData("#out_duration", input['information']['duration']);
+    setData("#out_class_schedule", input['information']['schedule']);
+    setData("#out_classroom", input['information']['classroom']);
+    setData("#out_main_field", input['information']['mainField']);
+    setData("#out_sub_field", input['information']['subField']);
+    setData("#out_description", input['information']['description']);
     // co_professors
     var co_professors_content = "";
-    for (let i = 0; i < input.co_professors.length; i++) {
-        co_professors_content += input.co_professors[i];
-        if (i != input.co_professors.length - 1) {
+    for (let i = 0; i < input['information']['coProfessors'].length; i++) {
+        co_professors_content += input['information']['coProfessors'][i];
+        if (i != input['information']['coProfessors'].length - 1) {
             co_professors_content += ",";
         }
     }
     setData("#out_co_professors", co_professors_content);
-
-    // syllabus
-    setData("#out_chi_objective", input.chi_objective);
-    setData("#out_eng_objective", input.eng_objective);
-    setData("#out_chi_pre_course", input.chi_pre_course);
-    setData("#out_eng_pre_course", input.eng_pre_course);
-    setData("#out_chi_outline", input.chi_outline);
-    setData("#out_eng_outline", input.eng_outline);
-    setData("#out_chi_teaching_method", input.chi_teaching_method);
-    setData("#out_eng_teaching_method", input.eng_teaching_method);
-    setData("#out_chi_reference", input.chi_reference);
-    setData("#out_eng_reference", input.eng_reference);
-    setData("#out_chi_syllabus", input.chi_syllabus);
-    setData("#out_eng_syllabus", input.eng_syllabus);
-    setData("#out_chi_evaluation", input.chi_evaluation);
-    setData("#out_eng_evaluation", input.eng_evaluation);
+    // guideline
+    setData("#out_chi_objective", input['guideline']['objective']['chinese']);
+    setData("#out_eng_objective", input['guideline']['objective']['english']);
+    setData("#out_chi_pre_course", input['guideline']['preCourse']['chinese']);
+    setData("#out_eng_pre_course", input['guideline']['preCourse']['english']);
+    setData("#out_chi_outline", input['guideline']['outline']['chinese']);
+    setData("#out_eng_outline", input['guideline']['outline']['english']);
+    setData("#out_chi_teaching_method", input['guideline']['teachingMethod']['chinese']);
+    setData("#out_eng_teaching_method", input['guideline']['teachingMethod']['english']);
+    setData("#out_chi_reference", input['guideline']['reference']['chinese']);
+    setData("#out_eng_reference", input['guideline']['reference']['english']);
+    setData("#out_chi_syllabus", input['guideline']['syllabus']['chinese']);
+    setData("#out_eng_syllabus", input['guideline']['syllabus']['english']);
+    setData("#out_chi_evaluation", input['guideline']['evaluation']['chinese']);
+    setData("#out_eng_evaluation", input['guideline']['evaluation']['english']);
 }
 
 // check input data
@@ -283,33 +333,21 @@ function checkData() {
 function sendData() {
     // send data
     if (location.search == "") { // add a course
-        $.ajax({
-            url: "https://cis.ntouo.tw/api/course",
-            type: "POST",
-            async: false,
-            data: input,
-            success: function () {
-                window.alert("新增課程成功");
-                $(location).attr('href', 'index.html');
-            }
-        });
+        fetch('http://localhost:8080/api', {
+            method: 'post',
+            body: JSON.stringify(input)
+        }).then(function() {
+            window.alert("新增課程成功")
+            $(location).attr('href', 'index.html')
+        })
     }
     else { // change a course
-        var search_str = location.search.substr(1);
-        var search_array = search_str.split('&');
-        var search_array0 = search_array[0].split('=');
-        var search_array1 = search_array[1].split('=');
-        var course_id = search_array0[1];
-        var grade = search_array1[1];
-        $.ajax({
-            url: "https://cis.ntouo.tw/api/course/" + course_id + "/" + grade,
-            type: "PUT",
-            async: false,
-            data: input,
-            success: function (response) {
-                window.alert("修改課程成功");
-                $(location).attr('href', 'index.html');
-            }
-        });
+        fetch('http://localhost:8080/api', {
+            method: 'put',
+            body: JSON.stringify(input)
+        }).then(function() {
+            window.alert("新增課程成功")
+            $(location).attr('href', 'index.html')
+        })
     }
 };
