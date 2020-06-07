@@ -65,7 +65,7 @@ $(document).ready(function () {
         variables: {}
     })
 
-    fetch('http://localhost:8080/graphql', {
+    fetch('https://course-information-system.herokuapp.com/graphql', {
         method: 'post',
         headers: headers,
         body: graphql_body,
@@ -165,7 +165,7 @@ $("#delete").click(function () {
     var grade = search_array1[1];
 
     if (window.confirm("真的要刪除本課程ㄇ？")) {
-        fetch('http://localhost:8080/api', {
+        fetch('https://course-information-system.herokuapp.com/api', {
             method: 'delete',
             body: JSON.stringify({
                 "id": id,

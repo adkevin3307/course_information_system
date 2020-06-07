@@ -41,7 +41,7 @@ function search() {
         variables: {}
     });
 
-    fetch('http://localhost:8080/graphql', {
+    fetch('https://course-information-system.herokuapp.com/graphql', {
         method: 'post',
         headers: headers,
         body: graphql_body,

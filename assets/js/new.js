@@ -135,7 +135,7 @@ $(document).ready(function () {
             variables: {}
         })
 
-        fetch('http://localhost:8080/graphql', {
+        fetch('https://course-information-system.herokuapp.com/graphql', {
             method: 'post',
             headers: headers,
             body: graphql_body,
@@ -333,7 +333,7 @@ function checkData() {
 function sendData() {
     // send data
     if (location.search == "") { // add a course
-        fetch('http://localhost:8080/api', {
+        fetch('https://course-information-system.herokuapp.com/api', {
             method: 'post',
             body: JSON.stringify(input)
         }).then(function() {
@@ -342,7 +342,7 @@ function sendData() {
         })
     }
     else { // change a course
-        fetch('http://localhost:8080/api', {
+        fetch('https://course-information-system.herokuapp.com/api', {
             method: 'put',
             body: JSON.stringify(input)
         }).then(function() {
