@@ -346,7 +346,7 @@ function sendData() {
             method: 'put',
             body: JSON.stringify(input)
         }).then(function() {
-            window.alert("新增課程成功")
+            window.alert("修改課程成功")
             $(location).attr('href', 'index.html')
         })
     }
