@@ -224,7 +224,7 @@ function click_sends() {
         return;
     }
     else {
-        input['schedule'] = $("#schedule").val().map(Number);
+        input['information']['schedule'] = $("#schedule").val();
     }
     input['information']['classroom'] = string2array($("#classroom").val());
     input['information']['mainField'] = $("#main_field").val();
